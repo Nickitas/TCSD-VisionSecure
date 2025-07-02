@@ -1,0 +1,15 @@
+@mixin scroll_snap_mandatory($axis: x, $snap-align: start) {
+    scroll-snap-type: #{$axis} mandatory;
+    overflow-#{$axis}: auto;
+    overflow-#{if($axis == x, y, x)}: hidden;
+    scrollbar-width: none;
+
+    -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+    -webkit-overflow-scrolling: touch;
+    -webkit-text-size-adjust: none;
+    -ms-overflow-style: none;
+
+    &>* {
+        scroll-snap-align: $snap-align;
+    }
+}

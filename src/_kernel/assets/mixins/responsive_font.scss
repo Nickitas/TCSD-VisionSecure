@@ -1,0 +1,17 @@
+$maxWidth: 1920;
+
+@mixin responsive-font($pcSize, $mobSize, $coeff: 0.7) {
+    $addSize: $pcSize - $mobSize;
+    $addMobSize: 2 * $addSize * $coeff;
+
+    // Адаптация с 320 до 1920
+    @media (min-width: 320px) and (max-width: #{$maxWidth - 1}px) {
+        font-size: calc(#{$mobSize}px + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+        transition: all 0.2s ease-in;
+    }
+
+    // На экранах > 1920 — фиксируем размер как у PC
+    @media (min-width: #{$maxWidth}px) {
+        font-size: #{$pcSize}px;
+    }
+}
