@@ -3,9 +3,12 @@ import { camerasApi } from '../api';
 
 export function useAllCamerasApi() {
 
-    const { data, isLoading, error, refetch } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     ...camerasApi.allCameras(),
-    select: (res) => res.cameras,
+    select: (res) => ({
+      users: res.cameras,
+      detail: res.detail,
+    }),
   });
 
   return {
