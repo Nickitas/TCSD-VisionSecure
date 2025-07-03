@@ -11,10 +11,6 @@ export const siteConfig = {
       href: appRouting.dashboard.main.path,
     },
     {
-      label: "Избранное",
-      href: appRouting.dashboard.favorites.path,
-    },
-    {
       label: "Камеры",
       href: appRouting.dashboard.cameras.path,
     },

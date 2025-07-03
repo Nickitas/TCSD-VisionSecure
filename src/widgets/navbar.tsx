@@ -29,17 +29,19 @@ export const Navbar = () => {
             <span className="font-bold text-inherit">{siteConfig.name}</span>
           </NextLink>
         </NavbarBrand>
-        {siteConfig.navMenuItems.filter((_, idx) => idx < 4).map((item, idx) => (
-          <NavbarItem key={`${item}-${idx}`}>
-            <Link
-              color={"foreground"}
-              href={item.href}
-              size="sm"
-            >
-              {item.label}
-            </Link>
-          </NavbarItem>
-        ))}
+        <ul className="hidden lg:flex gap-4 justify-start ml-2">
+          {siteConfig.navItems.filter((_, idx) => idx < 4).map((item, idx) => (
+            <NavbarItem key={`${item}-${idx}`}>
+              <Link
+                color={"foreground"}
+                href={item.href}
+                size="sm"
+              >
+                {item.label}
+              </Link>
+            </NavbarItem>
+          ))}
+        </ul>
       </NavbarContent>
 
       <NavbarContent
