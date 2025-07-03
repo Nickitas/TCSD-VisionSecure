@@ -39,12 +39,11 @@ export const About: FC = () => {
         )}
         {stack.category}
       </h4>
-      {/* Остальной код остается без изменений */}
     </div>
   );
 
   return (
-    <section className="flex flex-col gap-8 h-full p-4 md:p-6 max-w-6xl mx-auto">
+    <>
       {/* Hero Section */}
       <div className="text-center space-y-4">
         <h1 className={title({ className: "text-gradient" })}>
@@ -191,6 +190,6 @@ export const About: FC = () => {
           </div>
         </CardBody>
       </Card>
-    </section>
+    </>
   );
 };

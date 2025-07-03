@@ -6,6 +6,8 @@ export default function UnauthorizedLayout({
   children: ReactNode;
 }) {
   return (
-    children
+    <section className="flex flex-col gap-8 h-full p-6 max-w-[1280px] mx-auto">
+      {children}
+    </section>
   );
 }

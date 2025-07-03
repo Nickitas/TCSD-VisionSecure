@@ -17,7 +17,7 @@ export const Signup: FC = () => {
     } = useRegister();
 
     return (
-        <div className="flex items-center justify-center min-h-screen">
+        <>
             <Card className="w-full max-w-md p-8 space-y-6">
                 <div className="text-center">
                     <h1 className={subtitle()}>Регистрация</h1>
@@ -107,6 +107,6 @@ export const Signup: FC = () => {
                     </Button>
                 </form>
             </Card>
-        </div>
+        </>
     );
 };

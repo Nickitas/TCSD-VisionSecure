@@ -17,7 +17,7 @@ export const Signin: FC = () => {
     } = useLogin();
 
     return (
-        <section className="flex items-center justify-center min-h-screen">
+        <>
             <Card className="w-full max-w-md p-8 space-y-6">
                 <div className="text-center">
                     <h1 className={subtitle()}>Авторизация</h1>
@@ -65,6 +65,6 @@ export const Signin: FC = () => {
                     </Button>
                 </form>
             </Card>
-        </section>
+        </>
     );
 };

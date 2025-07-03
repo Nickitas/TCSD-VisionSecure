@@ -1,6 +1,6 @@
 
-export default function DashboardPage() {
+export default function GalerePage() {
   return (
-    'DashboardPage'
+    'Galere'
   );
 }

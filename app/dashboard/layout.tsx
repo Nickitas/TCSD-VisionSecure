@@ -1,3 +1,4 @@
+import { AsideCameras } from '@/widgets/AsideCameras';
 import { ReactNode } from 'react';
 
 export default function DashboardLayout({
@@ -7,7 +8,7 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="grid grid-cols-[260px_1fr] items-stretch gap-x-4 h-full">
-      <div>Aside</div>
+      <AsideCameras />
       {children}
     </div>
   );
