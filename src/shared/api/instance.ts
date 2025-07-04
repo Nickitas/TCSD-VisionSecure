@@ -62,7 +62,7 @@ export const apiInstance = <T>({
     const apiRoute = getApiRoute(type);
 
     const createDefaultHeaders = (cookie?: OptionsType): Record<string, string> => ({
-        // 'Authorization': `Bearer ${getCookie('token', cookie)?.toString().trim() || ''}`,
+        // 'Authorization': `Bearer ${getCookie('token', cookie)}`,
         'Authorization': `${getCookie('token', cookie)}`,
         'Content-Type': zip ? 'application/gzip' : 'application/json',
         'User-Agent': navigator.userAgent,

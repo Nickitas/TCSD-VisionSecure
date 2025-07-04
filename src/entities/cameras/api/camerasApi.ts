@@ -6,7 +6,11 @@ import {
 import { queryOptions } from '@tanstack/react-query';
 
 import {
+  AddCameraParams,
+  AddCameraResponse,
   GetAllCamerasResponse,
+  GetCameraByIdParams,
+  GetCameraByIdResponse,
 
 
 } from '../types';
@@ -26,22 +30,35 @@ class CamerasApi {
       queryFn: ({ signal }) =>
         apiInstance<GetAllCamerasResponse>({
           type: ApiTypeValues.MAIN,
-          method: ApiMethodValues.POST,
           path: `${this.baseKey}/me`,
           signal,
         }),
     });
   };
 
-  getCameraById = () => {
+  getCameraById = ({ id }: GetCameraByIdParams) => {
     return queryOptions({
       queryKey: [this.baseKey, 'getCameraById'],
+      queryFn: ({ signal }) =>
+        apiInstance<GetCameraByIdResponse>({
+          type: ApiTypeValues.MAIN,
+          path: `${this.baseKey}/${id}`,
+          signal,
+        }),
     })
   }
 
-  addCamera = () => {
+  addCamera = ({ body }: AddCameraParams) => {
     return queryOptions({
       queryKey: [this.baseKey, 'addCamera'],
+      queryFn: ({ signal }) =>
+        apiInstance<AddCameraResponse>({
+          type: ApiTypeValues.MAIN,
+          path: `${this.baseKey}`, 
+          method: ApiMethodValues.POST,
+          body: body,
+          signal,
+        }),
     })
   }
 
@@ -58,7 +75,7 @@ class CamerasApi {
   }
 
 
-  
+
   getAllUsersCameras = () => {
     return queryOptions({
       queryKey: [this.baseKey, 'getAllUsersCameras'],
