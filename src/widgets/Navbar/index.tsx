@@ -11,16 +11,17 @@ import {
 } from "@heroui/navbar";
 import { Button } from "@heroui/button";
 import { Link } from "@heroui/link";
-import { usePathname } from 'next/navigation';
 import NextLink from "next/link";
 
 import { siteConfig } from "@/_kernel/config/site.config";
 import { appRouting } from '@/_kernel/config/app.routing.config';
-import { ThemeSwitch } from "@/shared/ui/switches/ThemeSwitch";
 import { Logo } from "@/shared/ui/icons/base";
+import { ThemeSwitch } from "@/shared/ui/switches/ThemeSwitch";
+import { useLogout } from '@/entities/user/hooks';
 
 export const Navbar = () => {
-  const pathname = usePathname();
+
+  const { handleLogout } = useLogout();
 
   return (
     <HeroUINavbar maxWidth="xl" shouldHideOnScroll>
@@ -31,22 +32,6 @@ export const Navbar = () => {
             <span className="font-bold text-inherit">{siteConfig.name}</span>
           </NextLink>
         </NavbarBrand>
-        <ul className="hidden lg:flex gap-4 justify-start ml-2">
-          {siteConfig.navItems.filter((_, idx) => idx < 4).map((item, idx) => (
-            <NavbarItem 
-              key={`${item}-${idx}`}
-              isActive={item.href.replaceAll("/", "") === pathname.replaceAll("/", "")}
-            >
-              <Link
-                color={"foreground"}
-                href={item.href}
-                size="sm"
-              >
-                {item.label}
-              </Link>
-            </NavbarItem>
-          ))}
-        </ul>
       </NavbarContent>
 
       <NavbarContent
@@ -79,6 +64,7 @@ export const Navbar = () => {
           <NavbarMenuItem key='authorization'>
             <Button
               color='danger'
+              onPress={handleLogout}
             >
               Выход
             </Button>

@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from '@heroui/button';
 import { useEffect } from "react";
 
 export default function Error({
@@ -10,22 +11,19 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log the error to an error reporting service
-    /* eslint-disable no-console */
     console.error(error);
   }, [error]);
 
   return (
     <div>
-      <h2>Something went wrong!</h2>
-      <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
+      <h2>Что-то пошло не так!</h2>
+      <Button
+        onPress={
           () => reset()
         }
       >
-        Try again
-      </button>
+        Попробовать еще раз
+      </Button>
     </div>
   );
 }

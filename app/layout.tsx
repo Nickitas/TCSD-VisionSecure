@@ -7,7 +7,7 @@ import { Providers } from "./providers";
 
 import { siteConfig } from "@/_kernel/config/site.config";
 import { fontSans } from "@/_kernel/assets/styles/fonts";
-import { Navbar } from '@/widgets/navbar';
+import { Navbar } from '@/widgets/Navbar';
 import { Footer } from '@/widgets/Footer';
 
 export const metadata: Metadata = {

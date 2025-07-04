@@ -1,12 +1,14 @@
-import { 
-  apiInstance, 
-  ApiMethodValues, 
-  ApiTypeValues 
+import {
+  apiInstance,
+  ApiMethodValues,
+  ApiTypeValues
 } from '@/shared/api/instance';
 import { queryOptions } from '@tanstack/react-query';
 
-import { 
-    GetAllCamerasResponse 
+import {
+  GetAllCamerasResponse,
+
+
 } from '../types';
 
 
@@ -31,8 +33,49 @@ class CamerasApi {
     });
   };
 
-  
+  getCameraById = () => {
+    return queryOptions({
+      queryKey: [this.baseKey, 'getCameraById'],
+    })
+  }
 
+  addCamera = () => {
+    return queryOptions({
+      queryKey: [this.baseKey, 'addCamera'],
+    })
+  }
+
+  editCamera = () => {
+    return queryOptions({
+      queryKey: [this.baseKey, 'editCamera'],
+    })
+  }
+
+  deleteCamera = () => {
+    return queryOptions({
+      queryKey: [this.baseKey, 'deleteCamera'],
+    })
+  }
+
+
+  
+  getAllUsersCameras = () => {
+    return queryOptions({
+      queryKey: [this.baseKey, 'getAllUsersCameras'],
+    })
+  }
+
+  getCamerasByUser = () => {
+    return queryOptions({
+      queryKey: [this.baseKey, 'getCamerasByUser'],
+    })
+  }
+
+  getUserCamerasById = () => {
+    return queryOptions({
+      queryKey: [this.baseKey, 'getUserCamerasById'],
+    })
+  }
 }
 
 export const camerasApi = new CamerasApi('cameras');

@@ -39,6 +39,8 @@ class PageAccountConfig extends PagePath {
   }
 
   main = new PagePath(this.method(''));
+  edit = new PagePath(this.method('edit'));
+  settings = new PagePath(this.method('settings'));
 }
 
 /**

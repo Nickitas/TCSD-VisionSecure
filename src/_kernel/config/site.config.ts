@@ -7,40 +7,74 @@ export const siteConfig = {
   description: "VisionSecure предоставляет интуитивно понятный интерфейс для наблюдения за видео в реальном времени.",
   navItems: [
     {
+      key: 'account',
+      label: "Профиль",
+      href: appRouting.account.main.path,
+    },
+    {
+      key: 'gallery',
       label: "Галерея",
       href: appRouting.dashboard.main.path,
     },
     {
+      key: 'cameras',
       label: "Камеры",
       href: appRouting.dashboard.cameras.path,
     },
     {
+      key: 'users',
       label: "Пользователи",
       href: appRouting.dashboard.users.path,
     },
-  ],
-  navMenuItems: [
     {
-      label: "Галерея",
-      href: appRouting.dashboard.main.path,
-    },
-    {
+      key: 'favorites',
       label: "Избранное",
       href: appRouting.dashboard.favorites.path,
     },
     {
+      key: 'settings',
+      label: "Настройки",
+      href: appRouting.account.settings.path,
+    },
+  ],
+  navMenuItems: [
+    {
+      key: 'gallery',
+      label: "Галерея",
+      href: appRouting.dashboard.main.path,
+    },
+    {
+      key: 'cameras',
       label: "Камеры",
       href: appRouting.dashboard.cameras.path,
     },
     {
+      key: 'users',
       label: "Пользователи",
       href: appRouting.dashboard.users.path,
     },
     {
+      key: 'account',
+      label: "Профиль",
+      href: appRouting.account.main.path,
+    },
+    {
+      key: 'favorites',
+      label: "Избранное",
+      href: appRouting.dashboard.favorites.path,
+    },
+    {
+      key: 'settings',
+      label: "Настройки",
+      href: appRouting.account.settings.path,
+    },
+    {
+      key: 'about',
       label: "О проекте",
       href: appRouting.about.path,
     },
     {
+      key: 'contacts',
       label: "Контакты",
       href: appRouting.contacts.path,
     },
@@ -48,10 +82,12 @@ export const siteConfig = {
 
   navUseful: [
     {
+      key: 'about',
       label: "О проекте",
       href: appRouting.about.path,
     },
     {
+      key: 'contacts',
       label: "Контакты",
       href: appRouting.contacts.path,
     },

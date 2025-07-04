@@ -1,4 +1,4 @@
-import { AsideAccount } from '@/widgets/AsideAccount';
+import { Aside } from '@/widgets/Aside';
 import { ReactNode } from 'react';
 
 export default function AccountLayout({
@@ -8,7 +8,7 @@ export default function AccountLayout({
 }) {
   return (
     <div className="grid flex-grow items-stretch gap-x-4 grid-cols-[auto_minmax(280px,400px)]">
-      <AsideAccount />
+      <Aside />
       {children}
     </div>
   );
