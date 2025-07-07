@@ -1,19 +1,26 @@
 import { useQuery } from '@tanstack/react-query';
 import { camerasApi } from '../api';
 
+/**
+ * Хук для получения камеры по ID
+ * @param {GetCameraByIdParams} params - Параметры запроса (id камеры)
+ * @returns {Object} Объект с данными камеры, состоянием загрузки, ошибкой и функцией перезапроса
+ */
 export function useAllCamerasApi() {
 
-  const { data, isLoading, error, refetch } = useQuery({
+  const { data, isLoading, isError, error, refetch } = useQuery({
     ...camerasApi.allCameras(),
     select: (res) => ({
-      users: res.cameras,
+      cameras: res.cameras,
       detail: res.detail,
     }),
   });
 
   return {
-    data,
+    cameras: data?.cameras || [],
+    detail: data?.detail,
     isLoading,
+    isError,
     error,
     refetch,
   };
