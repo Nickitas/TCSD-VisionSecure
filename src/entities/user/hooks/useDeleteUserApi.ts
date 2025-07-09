@@ -6,6 +6,7 @@ import { DeleteUserParams } from '../types';
 export const useDeleteUser = () => {
     const deleteUserMutation = useMutation<void, Error, DeleteUserParams>({
         mutationFn: userApi.deleteUser,
+
         onError: (err) => {
             addToast({
                 title: "Ошибка удаления",
@@ -22,7 +23,7 @@ export const useDeleteUser = () => {
         },
     });
 
-    const handleDelete = async (id: string) => {
+    const handleDelete = async (id: DeleteUserParams['id']) => {
         return deleteUserMutation.mutateAsync({ id });
     }
 

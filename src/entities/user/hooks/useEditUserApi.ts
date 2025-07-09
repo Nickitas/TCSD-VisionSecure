@@ -2,13 +2,14 @@ import { useMutation } from '@tanstack/react-query';
 import { addToast } from '@heroui/toast';
 import { userApi } from '../api';
 import { FormEvent } from 'react';
-import { EditUserParams, User, UserRole } from '../types';
+import { EditUserParams, UserRole } from '../types';
 
-type UserId = Pick<User, 'id'>;
+type UserId = EditUserParams['id'];
 
 export const useEditUser = () => {
     const editUserMutation = useMutation<void, Error, EditUserParams>({
         mutationFn: userApi.editUser,
+
         onError: (err) => {
             addToast({
                 title: "Ошибка изменения",

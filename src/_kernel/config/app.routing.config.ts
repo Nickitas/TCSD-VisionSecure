@@ -15,7 +15,6 @@ class PagePath {
     return this.method('').replace(/\/$/, '');
   }
 }
-
 /**
  * Конфигурация для /dashboard
  */
@@ -28,6 +27,9 @@ class PageDashboardConfig extends PagePath {
   cameras = new PagePath(this.method('cameras'));
   users = new PagePath(this.method('users'));
   favorites = new PagePath(this.method('favorites'));
+
+  camera = (cameraId: string): PagePath => new PagePath(this.method(`${cameraId}`));
+  user = (userId: string): PagePath => new PagePath(this.method(`users/${userId}`));
 }
 
 /**
@@ -54,7 +56,7 @@ class AppRouting extends PagePath {
   signIn = new PagePath(this.method('signin'));
   signUp = new PagePath(this.method('signup'));
   recovery = new PagePath(this.method('recovery'));
-  
+
   about = new PagePath(this.method('about'));
   contacts = new PagePath(this.method('contacts'));
 

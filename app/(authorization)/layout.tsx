@@ -7,7 +7,7 @@ export default function AuthorizationLayout({
   children: ReactNode;
 }) {
   return (
-    <section className="flex flex-col items-center justify-between gap-7 min-h-full">
+    <section className="flex flex-col items-center justify-between gap-7 min-h-screen">
       {children}
       <Footer />
     </section>

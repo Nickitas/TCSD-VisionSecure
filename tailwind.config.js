@@ -9,31 +9,27 @@ const config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["var(--font-sans)"],
-        mono: ["var(--font-mono)"],
-      },
       colors: {
         light: {
-          primary: '#f8fafc',
-          secondary: '#f1f5f9',
+          primary: '#f5f3ff',
+          secondary: '#d6e7fe',
           text: {
-            primary: '#0f172a',
-            secondary: '#334155',
-            tertiary: '#64748b'
+            primary: '#1e1b4b',
+            secondary: '#4338ca',
+            tertiary: '#6d28d9'
           }
         },
         dark: {
-          primary: '#020617',
-          secondary: '#1e293b',
+          primary: '#0f172a',
+          secondary: '#1e1b4b',
           text: {
-            primary: '#f8fafc',
-            secondary: '#e2e8f0',
-            tertiary: '#94a3b8'
+            primary: '#e9d5ff',
+            secondary: '#c4b5fd',
+            tertiary: '#a78bfa'
           }
         }
       }
-    },
+    }
   },
   darkMode: "class",
   plugins: [heroui()],
