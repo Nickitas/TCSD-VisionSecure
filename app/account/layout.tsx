@@ -7,7 +7,7 @@ export default function AccountLayout({
   children: ReactNode;
 }) {
   return (
-    <div className="grid flex-grow items-stretch gap-x-4 grid-cols-[auto_minmax(280px,400px)]">
+    <div className="grid grid-cols-[220px_1fr] items-stretch gap-x-6 h-full">
       <Aside />
       {children}
     </div>

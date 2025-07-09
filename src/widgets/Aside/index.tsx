@@ -4,8 +4,8 @@ import React, { FC } from 'react';
 import Link from 'next/link';
 import { Tabs, Tab } from "@heroui/tabs";
 import { Button } from '@heroui/button';
+import { Divider } from "@heroui/divider";
 import { siteConfig } from '@/_kernel/config/site.config';
-import { UserCard } from '@/shared/ui/cards/UserCard';
 import { useLogout } from '@/entities/user/hooks';
 
 export const Aside: FC = () => {
@@ -13,30 +13,33 @@ export const Aside: FC = () => {
     const { handleLogout } = useLogout();
 
     return (
-        <aside className="flex flex-col">
-            <UserCard />
+        <aside className="flex flex-col justify-between gap-5 max-w-[220px]">
             <Tabs
                 aria-label="main navigation"
                 isVertical={true}
+                classNames={{
+                    base: "flex flex-col gap-2 w-full",
+                    tabContent: "w-full",
+                }}
             >
                 {siteConfig.navItems.map((item) => (
                     <Tab
-                        key={item.key}
+                        key={item.href}
                         as={Link}
                         href={item.href}
                         title={item.label}
                     />
                 ))}
-               
-                <hr />
-
+            </Tabs>
+            <div className='flex flex-col'>
+                <Divider className="my-2" />
                 <Button
-                    color='secondary'
+                    variant='flat'
                     onPress={handleLogout}
                 >
                     Выйти
                 </Button>
-            </Tabs>
+            </div>
         </aside>
     );
 };

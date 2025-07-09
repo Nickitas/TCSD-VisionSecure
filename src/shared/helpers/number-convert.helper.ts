@@ -9,7 +9,8 @@ export const numberConvert = (value: number | undefined): string => {
   if (!value) return '0';
 
   return new Intl.NumberFormat(
-    localStorage.getItem('i18nextLng') || 'ru',
+    'ru-RU',
+    { style: 'decimal', minimumFractionDigits: 0 }
   ).format(value);
 };
 //#endregion

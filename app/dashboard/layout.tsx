@@ -7,7 +7,7 @@ export default function DashboardLayout({
   children: ReactNode;
 }) {
   return (
-    <div className="grid grid-cols-[260px_1fr] items-stretch gap-x-4 h-full">
+    <div className="grid grid-cols-[220px_1fr] items-stretch gap-x-6 h-full">
       <Aside />
       {children}
     </div>

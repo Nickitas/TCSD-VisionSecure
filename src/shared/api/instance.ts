@@ -2,15 +2,11 @@ import pako from 'pako';
 import { getCookie, OptionsType, setCookie } from 'cookies-next/client';
 
 export interface IResponseError {
-    // error: string;
-    // message: string;
-    detail: [
-        {
-            loc: string[] | number[];
-            msg: string;
-            type: string;
-        }
-    ];
+    detail: Array<{
+        loc: (string | number)[];
+        msg: string;
+        type: string;
+    }>;
 }
 
 export const ApiTypeValues = {
@@ -21,23 +17,28 @@ type ApiType = (typeof ApiTypeValues)[keyof typeof ApiTypeValues];
 
 export const ApiMethodValues = {
     GET: 'GET',
+    HEAD: 'HEAD',
     POST: 'POST',
     PUT: 'PUT',
     DELETE: 'DELETE',
     PATCH: 'PATCH',
-};
+} as const;
 
-type MethodApi = (typeof ApiMethodValues)[keyof typeof ApiMethodValues];
+type MethodApiType = (typeof ApiMethodValues)[keyof typeof ApiMethodValues];
+
+export type ApiContentType = 'json' | 'zip' | 'm3u8' | 'form-data' | 'blob';
 
 export type Api = {
     path: string;
     type: ApiType;
-    body?: BodyInit | Record<string, any>;
+    body?: BodyInit | Record<string, any> | FormData;
+    contentType?: ApiContentType;
     cookie?: OptionsType;
-    method?: MethodApi;
+    method?: MethodApiType;
     headers?: Record<string, string>;
     signal?: AbortSignal;
     lastModified?: string;
+    responseType?: 'json' | 'blob' | 'text' | 'arrayBuffer';
 };
 
 const getApiRoute = (type: ApiType): string => {
@@ -48,91 +49,156 @@ const getApiRoute = (type: ApiType): string => {
     return routesMap[type] || '';
 };
 
-export const apiInstance = <T>({
+export const apiInstance = async <T>({
     path,
     body,
     cookie,
     type,
     method = ApiMethodValues.GET,
     signal,
-    zip = false,
+    contentType = 'json',
     lastModified = new Date().toUTCString(),
     headers = {},
-}: Api & { zip?: boolean }): Promise<T & IResponseError> => {
+    responseType = 'json',
+}: Api): Promise<T & IResponseError> => {
     const apiRoute = getApiRoute(type);
 
-    const createDefaultHeaders = (cookie?: OptionsType): Record<string, string> => ({
-        // 'Authorization': `Bearer ${getCookie('token', cookie)}`,
-        'Authorization': `${getCookie('token', cookie)}`,
-        'Content-Type': zip ? 'application/gzip' : 'application/json',
-        'User-Agent': navigator.userAgent,
-        'X-User-Agent': navigator.userAgent,
-        'If-Modified-Since': lastModified,
-        ...headers,
-    });
+    const contentTypeMap: Record<ApiContentType, string> = {
+        json: 'application/json',
+        zip: 'application/gzip',
+        m3u8: 'application/vnd.apple.mpegurl',
+        'form-data': 'multipart/form-data',
+        blob: 'application/octet-stream',
+    };
+
+    const createDefaultHeaders = (cookie?: OptionsType): Record<string, string> => {
+        const defaultHeaders: Record<string, string> = {
+            'Authorization': `${getCookie('token', cookie)}`,
+            'User-Agent': navigator.userAgent,
+            'X-User-Agent': navigator.userAgent,
+            'If-Modified-Since': lastModified,
+            ...headers,
+        };
+
+        // Не добавляем Content-Type для FormData, так как браузер сам установит его с boundary
+        if (contentType !== 'form-data') {
+            defaultHeaders['Content-Type'] = contentTypeMap[contentType];
+        }
+
+        return defaultHeaders;
+    };
 
     const requestHeaders = createDefaultHeaders(cookie);
 
-    const processedBody = () => {
+    const processRequestBody = (): BodyInit | undefined => {
         if (method === 'GET' || method === 'HEAD') return undefined;
-        if (zip) return pako.deflate(JSON.stringify(body));
-        if (typeof body === 'string' || body instanceof Blob || body instanceof FormData || body instanceof URLSearchParams) {
+
+        if (body instanceof FormData) {
             return body;
         }
+
+        if (body instanceof Blob || body instanceof URLSearchParams) {
+            return body;
+        }
+
+        if (contentType === 'zip') {
+            return pako.deflate(JSON.stringify(body));
+        }
+
+        if (contentType === 'blob' && body instanceof ArrayBuffer) {
+            return new Blob([body]);
+        }
+
+        if (typeof body === 'string') {
+            return body;
+        }
+
         return JSON.stringify(body);
     };
 
-    return fetch(`${apiRoute}/${path}`, {
-        body: processedBody(),
-        method,
-        headers: requestHeaders,
-        signal,
-    })
-        .then(async (response) => {
-            if (response.status === 304) {
-                return 'DATA_NOT_MODIFIED';
-            }
-
-            if (response.status >= 400 && response.status < 500) {
-                if ([403, 401].includes(response.status)) {
-                    setCookie('token', '');
-                }
-
-                const errorResponse = await response.json().catch(() => null);
-                throw new Error(errorResponse?.error || `Error: ${response.status}`);
-            }
-
-            const contentType = response.headers.get('content-type');
-
-            const handleResponseContent = async () => {
-                if (contentType?.includes('application/gzip') && zip) {
-                    const compressedData = await response.arrayBuffer();
-                    const decompressed = pako.inflate(compressedData, { to: 'string' });
-                    return JSON.parse(decompressed);
-                }
-
-                if (contentType?.includes('application/json')) {
-                    return response.json();
-                }
-
-                if (contentType?.includes('text/html')) {
-                    return { document: await response.text() } as T;
-                }
-
-                return response.blob();
-            };
-
-            return handleResponseContent();
-        })
-        .then((e) => {
-            if (e.error || e.statusCode || e.blockedAmount) {
-                throw {
-                    error: e.error || e.statusCode || 'Fetch error',
-                    time: e.time || null,
-                    blockedAmount: e.blockedAmount || null,
-                };
-            }
-
-            return e;
+    try {
+        const response = await fetch(`${apiRoute}/${path}`, {
+            body: processRequestBody(),
+            method,
+            headers: requestHeaders,
+            signal,
         });
+
+        if (response.status === 304) {
+            return 'DATA_NOT_MODIFIED' as any;
+        }
+
+        if (response.status >= 400 && response.status < 500) {
+            if ([401, 403].includes(response.status)) {
+                setCookie('token', '');
+            }
+
+            let errorResponse;
+            try {
+                errorResponse = await response.json();
+            } catch {
+                errorResponse = { error: `Error: ${response.status}` };
+            }
+
+            throw {
+                error: errorResponse?.error || `HTTP Error: ${response.status}`,
+                statusCode: response.status,
+                response: errorResponse,
+            };
+        }
+
+        const responseContentType = response.headers.get('content-type');
+
+        const handleResponse = async () => {
+            if (responseType === 'blob') {
+                return response.blob();
+            }
+
+            if (responseType === 'text') {
+                return response.text();
+            }
+
+            if (responseType === 'arrayBuffer') {
+                return response.arrayBuffer();
+            }
+
+            // Автоматическое определение по content-type, если responseType не указан
+            if (responseContentType?.includes('application/gzip')) {
+                const compressedData = await response.arrayBuffer();
+                const decompressed = pako.inflate(compressedData, { to: 'string' });
+                return JSON.parse(decompressed);
+            }
+
+            if (responseContentType?.includes('application/json')) {
+                return response.json();
+            }
+
+            if (responseContentType?.includes('text/')) {
+                return response.text();
+            }
+
+            // По умолчанию возвращаем blob для бинарных данных
+            return response.blob();
+        };
+
+        const responseData = await handleResponse();
+
+        if (responseData && typeof responseData === 'object' &&
+            ('error' in responseData || 'statusCode' in responseData || 'blockedAmount' in responseData)) {
+            throw {
+                error: responseData.error || responseData.statusCode || 'API Error',
+                time: responseData.time || null,
+                blockedAmount: responseData.blockedAmount || null,
+                response: responseData,
+            };
+        }
+
+        return responseData;
+
+    } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError') {
+            throw { error: 'Request aborted', isAborted: true };
+        }
+        throw error;
+    }
 };

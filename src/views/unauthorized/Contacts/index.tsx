@@ -37,7 +37,7 @@ export const Contacts: FC = () => {
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
-        <Card className="dark:bg-[#000] border dark:border-gray-800">
+        <Card className="dark:bg-[#f1f1f10c] p-2">
           <CardHeader>
             <h2 className="text-xl font-semibold">Контактная информация</h2>
           </CardHeader>
@@ -61,7 +61,7 @@ export const Contacts: FC = () => {
           </CardBody>
         </Card>
 
-        <Card className="dark:bg-[#000] border dark:border-gray-800">
+        <Card className="dark:bg-[#f1f1f10c] p-2">
           <CardHeader>
             <h2 className="text-xl font-semibold">Форма обратной связи</h2>
           </CardHeader>
@@ -102,7 +102,7 @@ export const Contacts: FC = () => {
         </Card>
       </div>
 
-      <Card className="dark:bg-[#000] border dark:border-gray-800">
+      <Card className="dark:bg-[#f1f1f10c] p-2">
         <CardHeader>
           <h2 className="text-xl font-semibold">Адрес</h2>
         </CardHeader>
@@ -116,7 +116,7 @@ export const Contacts: FC = () => {
         </CardBody>
       </Card>
 
-      <Card className="dark:bg-[#000] border dark:border-gray-800">
+      <Card className="dark:bg-[#f1f1f10c] p-2">
         <CardHeader>
           <h2 className="text-xl font-semibold">Как добраться</h2>
         </CardHeader>

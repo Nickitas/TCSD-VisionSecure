@@ -56,7 +56,7 @@ export const About: FC = () => {
       </div>
 
       {/* Architecture Section */}
-      <Card className="dark:bg-[#000] border dark:border-gray-800">
+      <Card className="dark:bg-[#f1f1f10c] p-2">
         <CardHeader>
           <h2 className="text-2xl font-bold">{aboutConfig.architecture.title}</h2>
         </CardHeader>
@@ -85,7 +85,7 @@ export const About: FC = () => {
       </Card>
 
       {/* Tech Stack Section */}
-      <Card className="dark:bg-[#000] border dark:border-gray-800">
+      <Card className="dark:bg-[#f1f1f10c] p-2">
         <CardHeader>
           <h2 className="text-2xl font-bold">{aboutConfig.technologies.title}</h2>
         </CardHeader>
@@ -96,7 +96,7 @@ export const About: FC = () => {
 
       {/* Features Grid */}
       <div className="grid md:grid-cols-2 gap-6">
-        <Card className="dark:bg-[#000] border dark:border-gray-800">
+        <Card className="dark:bg-[#f1f1f10c] p-2">
           <CardHeader>
             <h2 className="text-2xl font-bold">{aboutConfig.features.title}</h2>
           </CardHeader>
@@ -111,7 +111,7 @@ export const About: FC = () => {
         </Card>
 
         {/* Performance Section */}
-        <Card className="dark:bg-[#000] border dark:border-gray-800">
+        <Card className="dark:bg-[#f1f1f10c] p-2">
           <CardHeader>
             <h2 className="text-2xl font-bold">{aboutConfig.performance.title}</h2>
           </CardHeader>
@@ -141,7 +141,7 @@ export const About: FC = () => {
       </div>
 
       {/* Roadmap Section */}
-      <Card className="dark:bg-[#000] border dark:border-gray-800">
+      <Card className="dark:bg-[#f1f1f10c] p-2">
         <CardHeader>
           <h2 className="text-2xl font-bold">{aboutConfig.roadmap.title}</h2>
         </CardHeader>
@@ -166,7 +166,7 @@ export const About: FC = () => {
       </Card>
 
       {/* CTA Section */}
-      <Card className="dark:bg-[#000] border dark:border-gray-800">
+      <Card className="dark:bg-[#f1f1f10c] p-2">
         <CardHeader>
           <h2 className="text-2xl font-bold">{aboutConfig.cta.title}</h2>
         </CardHeader>

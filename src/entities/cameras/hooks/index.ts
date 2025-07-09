@@ -10,4 +10,4 @@ export { useUserCamerasById } from './useUserCamerasById';
 export { useFavoriteCamerasAllApi } from './useFavoriteCamerasAllApi';
 export { useFavoriteCameraById } from './useFavoriteCameraById';
 export { useAddFavoriteCamera } from './useAddFavoriteCamera';
-// export { useDeleteFavoriteCamera } from './useDeleteFavoriteCamera';
+export { useDeleteFavoriteCamera } from './useDeleteFavoriteCamera';

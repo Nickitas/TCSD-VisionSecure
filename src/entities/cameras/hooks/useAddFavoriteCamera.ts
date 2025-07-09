@@ -11,7 +11,7 @@ import { addToast } from '@heroui/toast';
  */
 export function useAddFavoriteCamera(options?: {
   optimistic?: boolean;
-  onSuccess?: (data: AddFavoriteCameraParams) => void;
+  onSuccess?: (data: AddFavoriteCameraResponse) => void;
   onError?: (error: Error) => void;
 }) {
   const queryClient = useQueryClient();
@@ -59,7 +59,7 @@ export function useAddFavoriteCamera(options?: {
         color: 'success',
       });
 
-    //   options?.onSuccess?.(data.success);
+      options?.onSuccess?.(data);
     },
 
     onError: (error, variables, context) => {
@@ -80,13 +80,13 @@ export function useAddFavoriteCamera(options?: {
   });
 
   return {
-    addCamera: mutation.mutate,
-    addCameraAsync: mutation.mutateAsync,
+    addFavoriteCamera: mutation.mutate,
+    addFavoriteCameraAsync: mutation.mutateAsync,
     isAdding: mutation.isPending,
     isAddError: mutation.isError,
     addError: mutation.error,
     isAddSuccess: mutation.isSuccess,
-    resetAddCamera: mutation.reset,
+    resetAddFavoriteCamera: mutation.reset,
     ...mutation, 
   };
 }
