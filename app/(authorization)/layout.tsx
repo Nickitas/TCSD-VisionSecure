@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { Footer } from '@/widgets/Footer';
 
 export default function AuthorizationLayout({
   children,
@@ -6,8 +7,9 @@ export default function AuthorizationLayout({
   children: ReactNode;
 }) {
   return (
-    <section className="flex items-center justify-center min-h-screen">
+    <section className="flex flex-col items-center justify-between gap-7 min-h-full">
       {children}
+      <Footer />
     </section>
   );
 }

@@ -8,7 +8,6 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/_kernel/config/site.config";
 import { fontSans } from "@/_kernel/assets/styles/fonts";
 import { Navbar } from '@/widgets/Navbar';
-import { Footer } from '@/widgets/Footer';
 
 export const metadata: Metadata = {
   title: {
@@ -45,10 +44,9 @@ export default function RootLayout({
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
             <Navbar />
-            <main className="container mx-auto max-w-7xl pt-4 px-6 pb-8 flex-grow">
+            <main className="container mx-auto max-w-7xl py-4 px-6 flex-grow max-h max-h-[calc(100vh-65px)]">
               {children}
             </main>
-            <Footer />
           </div>
         </Providers>
       </body>

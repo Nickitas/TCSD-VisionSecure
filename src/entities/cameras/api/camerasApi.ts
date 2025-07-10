@@ -45,7 +45,7 @@ class CamerasApi {
 
   getCameraById = ({ id }: GetCameraByIdParams) => {
     return queryOptions({
-      queryKey: [this.baseKey, 'getCameraById'],
+      queryKey: [this.baseKey, 'getCameraById', id],
       queryFn: ({ signal }) =>
         apiInstance<GetCameraByIdResponse>({
           type: ApiTypeValues.MAIN,

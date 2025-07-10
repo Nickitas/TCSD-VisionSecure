@@ -4,14 +4,14 @@ import { setCookie } from 'cookies-next/client';
 import { useMutation } from '@tanstack/react-query';
 import { addToast } from '@heroui/toast';
 import { appRouting } from '@/_kernel/config/app.routing.config';
-import { useValidCheck } from './useValidCheckApi';
 import { authenticationApi } from '../api';
 import { useUserStore } from '../store';
+import { useMeApi } from './useMeApi';
 
 
 export function useLogin() {
     const { replace } = useRouter();
-    const { refetch } = useValidCheck();
+    const { refetch: refetchMe } = useMeApi();
 
     const setUser = useUserStore(store => store.setUser);
 
@@ -24,20 +24,25 @@ export function useLogin() {
                 color: 'danger',
             });
         },
-        onSuccess: (access_token) => {
-
-            addToast({
-                title: "Авторизация прошла успешно",
-                description: "Авторизация прошла успешно",
-                color: 'success',
-            });
-
-            setCookie('token', access_token || '');
-        
-            // setUser(user);
+        onSuccess: async (response) => {
             
-            refetch();
-            replace(appRouting.dashboard.main.path);
+            if (!response.success) {
+                return;
+            }
+            
+            const { data } = await refetchMe();
+
+            if (data?.user) {
+                setUser(data.user);
+
+                addToast({
+                    title: "Авторизация прошла успешно",
+                    description: "Авторизация прошла успешно",
+                    color: 'success',
+                });
+
+                replace(appRouting.dashboard.main.path);
+            }
         },
     });
 

@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { title } from '@/_kernel/assets/styles/primitives';
+import { HeroSection } from '@/widgets/HeroSection';
 
 export const Favorites: FC = () => {
 
     return (
-        <section className="flex flex-col gap-4 h-full">
-            <h1 className={title()}>Избранное</h1>
-            
+        <section className="flex flex-col gap-4">
+            <HeroSection title="Избранное" />
+
         </section>
     );
 }

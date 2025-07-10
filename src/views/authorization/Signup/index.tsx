@@ -5,7 +5,7 @@ import { Card } from '@heroui/card';
 import { Input } from '@heroui/input';
 import { Button } from '@heroui/button';
 import { Spinner } from "@heroui/spinner";
-import { subtitle, text } from '@/_kernel/assets/styles/primitives';
+import { title, text } from '@/_kernel/assets/styles/primitives';
 import { useRegister } from '@/entities/user/hooks';
 
 
@@ -20,7 +20,7 @@ export const Signup: FC = () => {
         <>
             <Card className="w-full max-w-md p-8 space-y-6">
                 <div className="text-center">
-                    <h1 className={subtitle()}>Регистрация</h1>
+                    <h1 className={title({ size: 'sm' })}>Регистрация</h1>
                     <p className={text()}>Укажите учетные данные для регистрации</p>
                 </div>
 

@@ -6,7 +6,7 @@ import { Card } from '@heroui/card';
 import { Input } from '@heroui/input';
 import { Button } from '@heroui/button';
 import { Spinner } from "@heroui/spinner";
-import { subtitle, text } from '@/_kernel/assets/styles/primitives';
+import { title, text } from '@/_kernel/assets/styles/primitives';
 
 
 export const Signin: FC = () => {
@@ -20,7 +20,7 @@ export const Signin: FC = () => {
         <>
             <Card className="w-full max-w-md p-8 space-y-6">
                 <div className="text-center">
-                    <h1 className={subtitle()}>Авторизация</h1>
+                    <h1 className={title({ size: 'sm' })}>Авторизация</h1>
                     <p className={text()}>Введите свои учетные данные для входа</p>
                 </div>
 
@@ -32,6 +32,7 @@ export const Signin: FC = () => {
                             type="email"
                             label='Email'
                             placeholder="your@email.com"
+                            value={'user@example.com'}
                             required
                             disabled={isPending}
                         />
@@ -44,6 +45,7 @@ export const Signin: FC = () => {
                             type="password"
                             label='Пароль'
                             placeholder="••••••••"
+                            value={'string'}
                             required
                             disabled={isPending}
                         />

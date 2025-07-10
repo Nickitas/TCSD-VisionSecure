@@ -1,12 +1,8 @@
 import pako from 'pako';
-import { getCookie, OptionsType, setCookie } from 'cookies-next/client';
+import { OptionsType } from 'cookies-next/client';
 
 export interface IResponseError {
-    detail: Array<{
-        loc: (string | number)[];
-        msg: string;
-        type: string;
-    }>;
+    error: string;
 }
 
 export const ApiTypeValues = {
@@ -73,9 +69,7 @@ export const apiInstance = async <T>({
 
     const createDefaultHeaders = (cookie?: OptionsType): Record<string, string> => {
         const defaultHeaders: Record<string, string> = {
-            'Authorization': `${getCookie('token', cookie)}`,
             'User-Agent': navigator.userAgent,
-            'X-User-Agent': navigator.userAgent,
             'If-Modified-Since': lastModified,
             ...headers,
         };
@@ -122,7 +116,10 @@ export const apiInstance = async <T>({
             method,
             headers: requestHeaders,
             signal,
+            credentials: 'include',
         });
+
+        console.log(`Request to ${apiRoute}/${path} with headers:`, requestHeaders);
 
         if (response.status === 304) {
             return 'DATA_NOT_MODIFIED' as any;
@@ -130,7 +127,7 @@ export const apiInstance = async <T>({
 
         if (response.status >= 400 && response.status < 500) {
             if ([401, 403].includes(response.status)) {
-                setCookie('token', '');
+                
             }
 
             let errorResponse;

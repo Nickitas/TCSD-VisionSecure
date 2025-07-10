@@ -10,7 +10,6 @@ import {
   LoginParams,
   LoginResponse,
   LogoutResponse,
-  ValidCheckResponse,
 } from '../types';
 
 class AuthenticationApi {
@@ -46,14 +45,6 @@ class AuthenticationApi {
       path: `${this.baseKey}/logout`,
     });
   };
-
-  validCheck = () => {
-    return apiInstance<ValidCheckResponse>({
-      type: ApiTypeValues.MAIN,
-      method: ApiMethodValues.POST,
-      path: `${this.baseKey}/valid_check`,
-    });
-  };
 }
 
-export const authenticationApi = new AuthenticationApi('authorization');
+export const authenticationApi = new AuthenticationApi('auth');

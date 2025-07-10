@@ -5,6 +5,7 @@ import { Card, CardHeader, CardBody, CardFooter } from '@heroui/card';
 import { aboutConfig } from '@/_kernel/mock/about.config';
 import { title, subtitle, text } from '@/_kernel/assets/styles/primitives';
 import { GithubIcon } from '@/shared/ui/icons/base';
+import { HeroSection } from '@/widgets/HeroSection';
 
 
 export const About: FC = () => {
@@ -44,16 +45,11 @@ export const About: FC = () => {
 
   return (
     <>
-      {/* Hero Section */}
-      <div className="text-center space-y-4">
-        <h1 className={title({ className: "text-gradient" })}>
-          {aboutConfig.header.title}
-        </h1>
-        <p className={subtitle()}>{aboutConfig.header.subtitle}</p>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
-          {aboutConfig.header.description}
-        </p>
-      </div>
+      <HeroSection 
+        title={aboutConfig.header.title}
+        subtitle={aboutConfig.header.subtitle}
+        description={aboutConfig.header.description}
+      />
 
       {/* Architecture Section */}
       <Card className="dark:bg-[#f1f1f10c] p-2">

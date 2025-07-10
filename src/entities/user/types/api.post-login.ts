@@ -4,5 +4,5 @@ export type LoginParams = {
 }
 
 export type LoginResponse = {
-    access_token: string;
+    success?: boolean;
 }

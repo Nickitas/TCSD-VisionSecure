@@ -7,32 +7,32 @@ export const siteConfig = {
   description: "VisionSecure предоставляет интуитивно понятный интерфейс для наблюдения за видео в реальном времени.",
   navItems: [
     {
-      key: 'account',
+      key: '/account',
       label: "Профиль",
       href: appRouting.account.main.path,
     },
     {
-      key: 'gallery',
+      key: '/dashboard',
       label: "Галерея",
       href: appRouting.dashboard.main.path,
     },
     {
-      key: 'cameras',
+      key: '/dashboard/cameras',
       label: "Камеры",
       href: appRouting.dashboard.cameras.path,
     },
     {
-      key: 'users',
+      key: '/dashboard/users',
       label: "Пользователи",
       href: appRouting.dashboard.users.path,
     },
     {
-      key: 'favorites',
+      key: '/dashboard/favorites',
       label: "Избранное",
       href: appRouting.dashboard.favorites.path,
     },
     {
-      key: 'settings',
+      key: '/account/settings',
       label: "Настройки",
       href: appRouting.account.settings.path,
     },

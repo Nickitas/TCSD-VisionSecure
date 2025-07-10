@@ -1,11 +1,12 @@
 "use client";
 
 import React, { FC } from 'react';
-import { title, subtitle, text } from '@/_kernel/assets/styles/primitives';
+import { text } from '@/_kernel/assets/styles/primitives';
 import { Button } from '@heroui/button';
 import { Card, CardHeader, CardBody } from '@heroui/card';
 import { Input, Textarea } from '@heroui/input';
 import { MapFrame } from './components/MapFrame';
+import { HeroSection } from '@/widgets/HeroSection';
 
 export const Contacts: FC = () => {
   const contactsData = {
@@ -31,10 +32,10 @@ export const Contacts: FC = () => {
 
   return (
     <>
-      <div className="text-center">
-        <h1 className={title()}>Контакты</h1>
-        <p className={subtitle()}>Свяжитесь с нами удобным для вас способом</p>
-      </div>
+      <HeroSection 
+          title={'Контакты'}
+          subtitle={'Свяжитесь с нами удобным для вас способом'}
+        />
 
       <div className="grid md:grid-cols-2 gap-6">
         <Card className="dark:bg-[#f1f1f10c] p-2">

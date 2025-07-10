@@ -11,7 +11,6 @@ import {
   EditUserResponse,
   DeleteUserParams,
   DeleteUserResponse,
-
 } from '../types';
 
 class UserApi {
@@ -19,7 +18,7 @@ class UserApi {
   private baseKey: string;
 
   constructor(private readonly prefixKey: string) {
-    this.baseKey = `${this.prefixKey}/users`;
+    this.baseKey = `${this.prefixKey}users`;
   }
 
   allUsers = () => {

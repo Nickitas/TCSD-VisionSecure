@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { title } from '@/_kernel/assets/styles/primitives';
 import { UserCard } from '@/shared/ui/cards/UserCard';
+import { HeroSection } from '@/widgets/HeroSection';
 
 export const Account: FC = () => {
 
     return (
-        <section className="flex flex-col gap-4 h-full">
-            <h1 className={title()}>Мои данные</h1>
+        <section className="flex flex-col gap-4">
+            <HeroSection title="Мои данные" />
             <UserCard />
         </section>
     );
