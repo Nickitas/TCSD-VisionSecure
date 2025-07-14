@@ -1,12 +1,11 @@
-import { Camera } from './camera.interface';
+import { Camera } from "./camera.interface";
 
-
-type CameraId = Pick<Camera, 'id'>;
+type CameraId = Pick<Camera, "id">;
 
 export type GetFavoriteCameraByIdParams = {
-    id: CameraId;
-}
+  id: CameraId;
+};
 
 export type GetFavoriteCameraByIdResponse = {
-    camera: Camera;
-}
+  camera: Camera;
+};

@@ -1,9 +1,9 @@
-import { Camera } from './camera.interface'
+import { Camera } from "./camera.interface";
 
 export type DeleteCameraParams = {
-    id: Pick<Camera, 'id'>;
-}
+  id: Pick<Camera, "id">;
+};
 
 export type DeleteCameraResponse = {
-    success?: boolean;
-}
+  success?: boolean;
+};

@@ -3,7 +3,7 @@ type DynamicPath<T extends string = string> = {
 };
 
 class PagePath {
-  constructor(readonly prefix: string) { }
+  constructor(readonly prefix: string) {}
 
   method = (path: string): string => `${this.prefix}/${path}`;
 
@@ -12,7 +12,7 @@ class PagePath {
   }
 
   get normalizedPath(): string {
-    return this.method('').replace(/\/$/, '');
+    return this.method("").replace(/\/$/, "");
   }
 }
 /**
@@ -23,12 +23,12 @@ class PageDashboardConfig extends PagePath {
     super(prefix);
   }
 
-  main = new PagePath(this.method(''));
-  cameras = new PagePath(this.method('cameras'));
-  users = new PagePath(this.method('users'));
-  favorites = new PagePath(this.method('favorites'));
+  main = new PagePath(this.method(""));
+  cameras = new PagePath(this.method("cameras"));
+  users = new PagePath(this.method("users"));
+  favorites = new PagePath(this.method("favorites"));
 
-  camera = (cameraId: string): PagePath => new PagePath(this.method(`${cameraId}`));
+  camera = (cameraId: string): PagePath => new PagePath(this.method(`cameras/${cameraId}`));
   user = (userId: string): PagePath => new PagePath(this.method(`users/${userId}`));
 }
 
@@ -40,9 +40,9 @@ class PageAccountConfig extends PagePath {
     super(prefix);
   }
 
-  main = new PagePath(this.method(''));
-  edit = new PagePath(this.method('edit'));
-  settings = new PagePath(this.method('settings'));
+  main = new PagePath(this.method(""));
+  edit = new PagePath(this.method("edit"));
+  settings = new PagePath(this.method("settings"));
 }
 
 /**
@@ -53,15 +53,15 @@ class AppRouting extends PagePath {
     super(prefix);
   }
 
-  signIn = new PagePath(this.method('signin'));
-  signUp = new PagePath(this.method('signup'));
-  recovery = new PagePath(this.method('recovery'));
+  signIn = new PagePath(this.method("signin"));
+  signUp = new PagePath(this.method("signup"));
+  recovery = new PagePath(this.method("recovery"));
 
-  about = new PagePath(this.method('about'));
-  contacts = new PagePath(this.method('contacts'));
+  about = new PagePath(this.method("about"));
+  contacts = new PagePath(this.method("contacts"));
 
-  dashboard = new PageDashboardConfig(this.method('dashboard'));
-  account = new PageAccountConfig(this.method('account'));
+  dashboard = new PageDashboardConfig(this.method("dashboard"));
+  account = new PageAccountConfig(this.method("account"));
 }
 
-export const appRouting = new AppRouting('');
+export const appRouting = new AppRouting("");

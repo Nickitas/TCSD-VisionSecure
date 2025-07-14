@@ -1,10 +1,10 @@
-import { Camera } from './camera.interface'
+import { Camera } from "./camera.interface";
 
 export type EditCameraParams = {
-    id: string,
-    body: Pick<Camera, 'name' | 'stream_url' | 'location'>;
-}
+  id: string;
+  body: Pick<Camera, "name" | "streamUrl" | "location">;
+};
 
 export type EditCameraResponse = {
-    success?: boolean;
-}
+  success?: boolean;
+};

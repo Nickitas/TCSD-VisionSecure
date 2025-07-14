@@ -1,9 +1,9 @@
-import { Camera } from '@/entities/cameras/types';
+import { Camera } from "@/entities/cameras/types";
 
 export type StartCameraParams = {
-    id: Pick<Camera, 'id'>;
-}
+  id: Pick<Camera, "id">;
+};
 
 export type StartCameraResponse = {
-    streamUrl: string | null;
-}
+  streamUrl: string | null;
+};

@@ -1,12 +1,12 @@
-import { User } from './user.interface';
+import { User } from "./user.interface";
 
-type UserId = Pick<User, 'id'>;
+type UserId = Pick<User, "id">;
 
-type UserBody = Omit<User, 'id' | 'created_at' | 'updated_at'>;
+type UserBody = Omit<User, "id" | "created_at" | "updated_at">;
 
 export type EditUserParams = {
-    id: UserId['id'];
-    body: UserBody;
-}
+  id: UserId["id"];
+  body: UserBody;
+};
 
 export type EditUserResponse = void;

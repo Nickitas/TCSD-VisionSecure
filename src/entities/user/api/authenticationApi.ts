@@ -1,8 +1,4 @@
-import { 
-  apiInstance, 
-  ApiMethodValues, 
-  ApiTypeValues 
-} from '@/shared/api/instance';
+import { apiInstance, ApiMethodValues, ApiTypeValues } from "@/shared/api/instance";
 
 import {
   RegisterParams,
@@ -10,10 +6,9 @@ import {
   LoginParams,
   LoginResponse,
   LogoutResponse,
-} from '../types';
+} from "../types";
 
 class AuthenticationApi {
-
   private baseKey: string;
 
   constructor(private readonly prefixKey: string) {
@@ -47,4 +42,4 @@ class AuthenticationApi {
   };
 }
 
-export const authenticationApi = new AuthenticationApi('auth');
+export const authenticationApi = new AuthenticationApi("auth");

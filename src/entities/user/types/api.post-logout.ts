@@ -1,3 +1,3 @@
 export type LogoutResponse = {
-    message: string;
-}
+  message: string;
+};

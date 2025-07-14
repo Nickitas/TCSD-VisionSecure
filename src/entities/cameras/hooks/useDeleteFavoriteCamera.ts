@@ -1,7 +1,7 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { favoriteCamerasApi } from '../api';
-import { DeleteFavoriteCameraParams, DeleteFavoriteCameraResponse } from '../types';
-import { addToast } from '@heroui/toast';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { favoriteCamerasApi } from "../api";
+import { DeleteFavoriteCameraParams, DeleteFavoriteCameraResponse } from "../types";
+import { addToast } from "@heroui/toast";
 
 /**
  * Хук для удаления камеры из избранного
@@ -27,14 +27,15 @@ export function useDeleteFavoriteCamera(options?: {
       if (!optimistic) return;
 
       // Отменяем текущие запросы
-      await queryClient.cancelQueries({ queryKey: ['favoriteCameras'] });
+      await queryClient.cancelQueries({ queryKey: ["favoriteCameras"] });
 
       // Сохраняем предыдущее состояние для отката
-      const previousCameras = queryClient.getQueryData(['favoriteCameras']);
+      const previousCameras = queryClient.getQueryData(["favoriteCameras"]);
 
       // Оптимистично удаляем камеру
-      queryClient.setQueryData(['favoriteCameras'], (old: any[]) => 
-        old?.filter(camera => camera.id !== cameraToDelete.id) || []
+      queryClient.setQueryData(
+        ["favoriteCameras"],
+        (old: any[]) => old?.filter((camera) => camera.id !== cameraToDelete.id) || [],
       );
 
       return { previousCameras };
@@ -42,32 +43,32 @@ export function useDeleteFavoriteCamera(options?: {
 
     onSuccess: (data, variables, context) => {
       // Инвалидируем кэш для получения актуальных данных
-      queryClient.invalidateQueries({ 
-        queryKey: ['favoriteCameras'],
-        refetchType: 'active'
+      queryClient.invalidateQueries({
+        queryKey: ["favoriteCameras"],
+        refetchType: "active",
       });
 
       addToast({
         title: "Камера удалена",
         description: "Камера успешно удалена из избранного",
-        color: 'success',
+        color: "success",
       });
 
       options?.onSuccess?.(data, variables);
     },
 
     onError: (error, variables, context) => {
-      console.error('Error deleting camera:', error);
+      console.error("Error deleting camera:", error);
 
       // Откатываем изменения при ошибке
       if (context) {
-        queryClient.setQueryData(['favoriteCameras'], context);
+        queryClient.setQueryData(["favoriteCameras"], context);
       }
 
       addToast({
         title: "Ошибка удаления",
         description: error.message || "Не удалось удалить камеру из избранного",
-        color: 'warning',
+        color: "warning",
       });
 
       options?.onError?.(error);

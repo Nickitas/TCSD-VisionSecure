@@ -1,15 +1,14 @@
-import { User } from '@/entities/user/types';
-import { Camera } from './camera.interface';
+import { User } from "@/entities/user/types";
+import { Camera } from "./camera.interface";
 
-
-type UserId = Pick<User, 'id'>;
-type CameraId = Pick<Camera, 'id'>;
+type UserId = Pick<User, "id">;
+type CameraId = Pick<Camera, "id">;
 
 export type GetCamerasByUserParams = {
-    id: UserId;
-}
+  id: UserId;
+};
 
 export type GetCamerasByUserResponse = {
-    user_id?: UserId;
-    camera_id?: CameraId;
-}
+  user_id?: UserId;
+  camera_id?: CameraId;
+};

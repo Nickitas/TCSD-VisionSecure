@@ -1,7 +1,5 @@
-import { Users } from '@/views/dashboard/users-page/ui';
+import { Users } from "@/views/dashboard/Users";
 
 export default function UsersPage() {
-  return (
-    <Users />
-  );
+  return <Users />;
 }

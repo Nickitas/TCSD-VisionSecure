@@ -1,1 +1,1 @@
-export { usersMock } from './users';
+export { usersMock } from "./users";

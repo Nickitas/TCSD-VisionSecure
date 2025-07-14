@@ -1,40 +1,79 @@
-import React, { FC } from 'react';
-import Link from 'next/link';
-import { Button } from '@heroui/button';
-import { Card, CardHeader, CardBody, CardFooter } from '@heroui/card';
-import { aboutConfig } from '@/_kernel/mock/about.config';
-import { title, subtitle, text } from '@/_kernel/assets/styles/primitives';
-import { GithubIcon } from '@/shared/ui/icons/base';
-import { HeroSection } from '@/widgets/HeroSection';
-
+import React, { FC } from "react";
+import Link from "next/link";
+import { Button } from "@heroui/button";
+import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
+import { aboutConfig } from "@/_kernel/mock/about.config";
+import { title, subtitle, text } from "@/_kernel/assets/styles/primitives";
+import { GithubIcon } from "@/shared/ui/icons/base";
+import { HeroSection } from "@/widgets/HeroSection";
 
 export const About: FC = () => {
   const renderTechStack = (stack: { category: string; items: string[] }) => (
     <div key={stack.category} className="space-y-2">
       <h4 className="font-medium text-lg flex items-center gap-2">
-        {stack.category === 'Frontend' && (
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        {stack.category === "Frontend" && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
             <line x1="8" y1="21" x2="16" y2="21"></line>
             <line x1="12" y1="17" x2="12" y2="21"></line>
           </svg>
         )}
-        {stack.category === 'Backend' && (
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        {stack.category === "Backend" && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
             <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
             <line x1="6" y1="6" x2="6.01" y2="6"></line>
             <line x1="6" y1="18" x2="6.01" y2="18"></line>
           </svg>
         )}
-        {stack.category === 'Stream Service' && (
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        {stack.category === "Stream Service" && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
             <circle cx="12" cy="13" r="4"></circle>
           </svg>
         )}
-        {stack.category === 'Инфраструктура' && (
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        {stack.category === "Инфраструктура" && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
           </svg>
         )}
@@ -45,7 +84,7 @@ export const About: FC = () => {
 
   return (
     <>
-      <HeroSection 
+      <HeroSection
         title={aboutConfig.header.title}
         subtitle={aboutConfig.header.subtitle}
         description={aboutConfig.header.description}
@@ -122,9 +161,7 @@ export const About: FC = () => {
                 ))}
               </div>
               <div className="space-y-2 pt-4">
-                <h4 className="font-semibold">
-                  {aboutConfig.performance.comparison.title}
-                </h4>
+                <h4 className="font-semibold">{aboutConfig.performance.comparison.title}</h4>
                 <ul className={`${text()} list-disc pl-5 space-y-1`}>
                   {aboutConfig.performance.comparison.items.map((item, i) => (
                     <li key={i}>{item}</li>
@@ -174,13 +211,13 @@ export const About: FC = () => {
                 key={button.text}
                 as={Link}
                 href={button.url}
-                variant={button.text.includes('GitHub') ? 'solid' : 'bordered'}
+                variant={button.text.includes("GitHub") ? "solid" : "bordered"}
                 size="lg"
                 className="gap-2"
               >
                 {button.text}
                 {/* {button.url.startsWith('http') && <ExternalLink size={16} />} */}
-                {button.text.includes('GitHub') && <GithubIcon size={16} />}
+                {button.text.includes("GitHub") && <GithubIcon size={16} />}
               </Button>
             ))}
           </div>

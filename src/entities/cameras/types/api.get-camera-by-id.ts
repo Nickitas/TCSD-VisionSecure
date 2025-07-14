@@ -1,7 +1,7 @@
-import { Camera } from './camera.interface';
+import { Camera } from "./camera.interface";
 
-export type GetCameraByIdParams = Pick<Camera, 'id'>;
+export type GetCameraByIdParams = Pick<Camera, "id">;
 
 export type GetCameraByIdResponse = {
-    camera: Camera;
-}
+  camera: Camera;
+};

@@ -1,5 +1,5 @@
-import { Camera } from './camera.interface';
+import { Camera } from "./camera.interface";
 
 export type GetAllUsersCamerasResponse = {
-    cameras: Array<Camera>;
-}
+  cameras: Array<Camera>;
+};

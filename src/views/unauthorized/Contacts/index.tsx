@@ -1,19 +1,19 @@
 "use client";
 
-import React, { FC } from 'react';
-import { text } from '@/_kernel/assets/styles/primitives';
-import { Button } from '@heroui/button';
-import { Card, CardHeader, CardBody } from '@heroui/card';
-import { Input, Textarea } from '@heroui/input';
-import { MapFrame } from './components/MapFrame';
-import { HeroSection } from '@/widgets/HeroSection';
+import React, { FC } from "react";
+import { text } from "@/_kernel/assets/styles/primitives";
+import { Button } from "@heroui/button";
+import { Card, CardHeader, CardBody } from "@heroui/card";
+import { Input, Textarea } from "@heroui/input";
+import { MapFrame } from "./components/MapFrame";
+import { HeroSection } from "@/widgets/HeroSection";
 
 export const Contacts: FC = () => {
   const contactsData = {
     workTime: "Пн.-Пт.: 8:30 - 17:00",
     email: "spanov@donstu.ru",
     phone: "238-17-13",
-    address: "344003, г. Ростов-на-Дону, пл. Гагарина, 1. ауд. 1-391а"
+    address: "344003, г. Ростов-на-Дону, пл. Гагарина, 1. ауд. 1-391а",
   };
 
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -32,10 +32,7 @@ export const Contacts: FC = () => {
 
   return (
     <>
-      <HeroSection 
-          title={'Контакты'}
-          subtitle={'Свяжитесь с нами удобным для вас способом'}
-        />
+      <HeroSection title={"Контакты"} subtitle={"Свяжитесь с нами удобным для вас способом"} />
 
       <div className="grid md:grid-cols-2 gap-6">
         <Card className="dark:bg-[#f1f1f10c] p-2">
@@ -44,18 +41,24 @@ export const Contacts: FC = () => {
           </CardHeader>
           <CardBody className="space-y-4">
             <div className="flex flex-col">
-              <h3 className={`${text({ weight: 'medium' })}`}>Режим работы:</h3>
+              <h3 className={`${text({ weight: "medium" })}`}>Режим работы:</h3>
               <p className={text()}>{contactsData.workTime}</p>
             </div>
             <div className="flex flex-col">
-              <h3 className={`${text({ weight: 'medium' })}`}>Электронная почта:</h3>
-              <a href={`mailto:${contactsData.email}`} className={`${text()} hover:text-primary-500 transition-colors`}>
+              <h3 className={`${text({ weight: "medium" })}`}>Электронная почта:</h3>
+              <a
+                href={`mailto:${contactsData.email}`}
+                className={`${text()} hover:text-primary-500 transition-colors`}
+              >
                 {contactsData.email}
               </a>
             </div>
             <div className="flex flex-col">
-              <h3 className={`${text({ weight: 'medium' })}`}>Телефон:</h3>
-              <a href={`tel:${contactsData.phone}`} className={`${text()} hover:text-primary-500 transition-colors`}>
+              <h3 className={`${text({ weight: "medium" })}`}>Телефон:</h3>
+              <a
+                href={`tel:${contactsData.phone}`}
+                className={`${text()} hover:text-primary-500 transition-colors`}
+              >
                 {contactsData.phone}
               </a>
             </div>
@@ -68,12 +71,7 @@ export const Contacts: FC = () => {
           </CardHeader>
           <CardBody>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <Input
-                label="Ваше имя"
-                placeholder="Иван Иванов"
-                fullWidth
-                required
-              />
+              <Input label="Ваше имя" placeholder="Иван Иванов" fullWidth required />
               <Input
                 label="Электронная почта"
                 placeholder="example@mail.com"
@@ -95,7 +93,7 @@ export const Contacts: FC = () => {
                   isLoading={isSubmitting}
                   disabled={isSubmitting || isSuccess}
                 >
-                  {isSuccess ? 'Отправлено!' : 'Отправить'}
+                  {isSuccess ? "Отправлено!" : "Отправить"}
                 </Button>
               </div>
             </form>

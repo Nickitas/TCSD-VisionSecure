@@ -1,6 +1,6 @@
-import { queryOptions } from '@tanstack/react-query';
+import { queryOptions } from "@tanstack/react-query";
 
-import { apiInstance, ApiMethodValues, ApiTypeValues } from '@/shared/api/instance';
+import { apiInstance, ApiMethodValues, ApiTypeValues } from "@/shared/api/instance";
 
 import {
   GetAllUsersResponse,
@@ -11,10 +11,9 @@ import {
   EditUserResponse,
   DeleteUserParams,
   DeleteUserResponse,
-} from '../types';
+} from "../types";
 
 class UserApi {
-
   private baseKey: string;
 
   constructor(private readonly prefixKey: string) {
@@ -23,7 +22,7 @@ class UserApi {
 
   allUsers = () => {
     return queryOptions({
-      queryKey: [this.baseKey, 'allUsers'],
+      queryKey: [this.baseKey, "allUsers"],
       queryFn: ({ signal }) =>
         apiInstance<GetAllUsersResponse>({
           type: ApiTypeValues.MAIN,
@@ -35,7 +34,7 @@ class UserApi {
 
   me = () => {
     return queryOptions({
-      queryKey: [this.baseKey, 'me'],
+      queryKey: [this.baseKey, "me"],
       queryFn: ({ signal }) =>
         apiInstance<GetMeResponse>({
           type: ApiTypeValues.MAIN,
@@ -47,7 +46,7 @@ class UserApi {
 
   userByID = ({ id }: GetUserByIDParams) => {
     return queryOptions({
-      queryKey: [this.baseKey, 'userByID', id],
+      queryKey: [this.baseKey, "userByID", id],
       queryFn: ({ signal }) =>
         apiInstance<GetUserByIDResponse>({
           type: ApiTypeValues.MAIN,
@@ -65,7 +64,7 @@ class UserApi {
       body: body,
     });
   };
-  
+
   deleteUser = ({ id }: DeleteUserParams) => {
     return apiInstance<DeleteUserResponse>({
       type: ApiTypeValues.MAIN,
@@ -75,4 +74,4 @@ class UserApi {
   };
 }
 
-export const userApi = new UserApi('');
+export const userApi = new UserApi("");

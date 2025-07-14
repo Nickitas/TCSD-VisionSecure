@@ -1,7 +1,7 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { favoriteCamerasApi } from '../api';
-import { AddFavoriteCameraParams, AddFavoriteCameraResponse } from '../types';
-import { addToast } from '@heroui/toast';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { favoriteCamerasApi } from "../api";
+import { AddFavoriteCameraParams, AddFavoriteCameraResponse } from "../types";
+import { addToast } from "@heroui/toast";
 
 /**
  * Хук для добавления камеры в избранное с обработкой состояний, optimistic updates и уведомлениями
@@ -25,15 +25,15 @@ export function useAddFavoriteCamera(options?: {
       if (!optimistic) return;
 
       // Отменяем текущие запросы чтобы избежать race condition
-      await queryClient.cancelQueries({ queryKey: ['cameras', 'favorite', 'add'] });
+      await queryClient.cancelQueries({ queryKey: ["cameras", "favorite", "add"] });
 
       // Сохраняем предыдущее состояние для отката
-      const previousCameras = queryClient.getQueryData(['cameras', 'favorite', 'add']);
+      const previousCameras = queryClient.getQueryData(["cameras", "favorite", "add"]);
 
       // Оптимистично обновляем данные
-      queryClient.setQueryData(['cameras'], (old: any) => [
+      queryClient.setQueryData(["cameras"], (old: any) => [
         ...(old || []),
-        { id: newCamera.id, isOptimistic: true }
+        { id: newCamera.id, isOptimistic: true },
       ]);
 
       return { previousCameras };
@@ -41,34 +41,34 @@ export function useAddFavoriteCamera(options?: {
 
     onSuccess: (data, variables, context) => {
       // Инвалидируем кэш вместо прямого обновления для получения актуальных данных
-      queryClient.invalidateQueries({ 
-        queryKey: ['cameras'],
-        exact: true
+      queryClient.invalidateQueries({
+        queryKey: ["cameras"],
+        exact: true,
       });
 
       // Удаляем временные optimistic данные если они есть
       if (optimistic) {
-        queryClient.setQueryData(['cameras'], (old: any) => 
-          old?.filter((c: any) => !c.isOptimistic)
+        queryClient.setQueryData(["cameras"], (old: any) =>
+          old?.filter((c: any) => !c.isOptimistic),
         );
       }
 
       addToast({
         title: "Камера добавлена",
         description: "Камера успешно добавлена в избранное",
-        color: 'success',
+        color: "success",
       });
 
       options?.onSuccess?.(data);
     },
 
     onError: (error, variables, context) => {
-      console.error('Error adding camera:', error);
+      console.error("Error adding camera:", error);
 
       addToast({
         title: "Ошибка добавления",
         description: error.message || "Не удалось добавить камеру в избранное",
-        color: 'warning',
+        color: "warning",
       });
 
       options?.onError?.(error);
@@ -87,6 +87,6 @@ export function useAddFavoriteCamera(options?: {
     addError: mutation.error,
     isAddSuccess: mutation.isSuccess,
     resetAddFavoriteCamera: mutation.reset,
-    ...mutation, 
+    ...mutation,
   };
 }

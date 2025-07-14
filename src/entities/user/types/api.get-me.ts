@@ -1,3 +1,3 @@
-import { User } from './user.interface';
+import { User } from "./user.interface";
 
 export type GetMeResponse = User;

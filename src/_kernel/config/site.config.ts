@@ -1,80 +1,81 @@
-import { appRouting } from './app.routing.config';
+import { appRouting } from "./app.routing.config";
 
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: "VisionSecure",
-  description: "VisionSecure предоставляет интуитивно понятный интерфейс для наблюдения за видео в реальном времени.",
+  description:
+    "VisionSecure предоставляет интуитивно понятный интерфейс для наблюдения за видео в реальном времени.",
   navItems: [
     {
-      key: '/account',
+      key: "/account",
       label: "Профиль",
       href: appRouting.account.main.path,
     },
     {
-      key: '/dashboard',
+      key: "/dashboard",
       label: "Галерея",
       href: appRouting.dashboard.main.path,
     },
     {
-      key: '/dashboard/cameras',
+      key: "/dashboard/cameras",
       label: "Камеры",
       href: appRouting.dashboard.cameras.path,
     },
     {
-      key: '/dashboard/users',
+      key: "/dashboard/users",
       label: "Пользователи",
       href: appRouting.dashboard.users.path,
     },
     {
-      key: '/dashboard/favorites',
+      key: "/dashboard/favorites",
       label: "Избранное",
       href: appRouting.dashboard.favorites.path,
     },
     {
-      key: '/account/settings',
+      key: "/account/settings",
       label: "Настройки",
       href: appRouting.account.settings.path,
     },
   ],
   navMenuItems: [
     {
-      key: 'gallery',
+      key: "gallery",
       label: "Галерея",
       href: appRouting.dashboard.main.path,
     },
     {
-      key: 'cameras',
+      key: "cameras",
       label: "Камеры",
       href: appRouting.dashboard.cameras.path,
     },
     {
-      key: 'users',
+      key: "users",
       label: "Пользователи",
       href: appRouting.dashboard.users.path,
     },
     {
-      key: 'account',
+      key: "account",
       label: "Профиль",
       href: appRouting.account.main.path,
     },
     {
-      key: 'favorites',
+      key: "favorites",
       label: "Избранное",
       href: appRouting.dashboard.favorites.path,
     },
     {
-      key: 'settings',
+      key: "settings",
       label: "Настройки",
       href: appRouting.account.settings.path,
     },
     {
-      key: 'about',
+      key: "about",
       label: "О проекте",
       href: appRouting.about.path,
     },
     {
-      key: 'contacts',
+      key: "contacts",
       label: "Контакты",
       href: appRouting.contacts.path,
     },
@@ -82,12 +83,12 @@ export const siteConfig = {
 
   navUseful: [
     {
-      key: 'about',
+      key: "about",
       label: "О проекте",
       href: appRouting.about.path,
     },
     {
-      key: 'contacts',
+      key: "contacts",
       label: "Контакты",
       href: appRouting.contacts.path,
     },
@@ -97,10 +98,8 @@ export const siteConfig = {
     workTime: "Пн.-Пт.: 8:30 - 17:00",
     email: "spanov@donstu.ru",
     phone: "238-17-13",
-    address: "344003, г. Ростов-на-Дону, пл. Гагарина, 1. ауд. 1-391а"
+    address: "344003, г. Ростов-на-Дону, пл. Гагарина, 1. ауд. 1-391а",
   },
-
-
 
   links: {
     github: "",

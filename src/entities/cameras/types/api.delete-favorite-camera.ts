@@ -1,11 +1,11 @@
-import { Camera } from './camera.interface';
+import { Camera } from "./camera.interface";
 
-type CameraId = Pick<Camera, 'id'>;
+type CameraId = Pick<Camera, "id">;
 
 export type DeleteFavoriteCameraParams = {
-    id: CameraId;
-}
+  id: CameraId;
+};
 
 export type DeleteFavoriteCameraResponse = {
-    success?: boolean;
-}
+  success?: boolean;
+};

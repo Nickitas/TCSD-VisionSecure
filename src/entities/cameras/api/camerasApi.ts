@@ -1,9 +1,5 @@
-import {
-  apiInstance,
-  ApiMethodValues,
-  ApiTypeValues
-} from '@/shared/api/instance';
-import { queryOptions } from '@tanstack/react-query';
+import { apiInstance, ApiMethodValues, ApiTypeValues } from "@/shared/api/instance";
+import { queryOptions } from "@tanstack/react-query";
 
 import {
   AddCameraParams,
@@ -20,11 +16,9 @@ import {
   GetCamerasByUserResponse,
   GetUserCamerasByIdParams,
   GetUserCamerasByIdResponse,
-} from '../types';
-
+} from "../types";
 
 class CamerasApi {
-
   private baseKey: string;
 
   constructor(private readonly prefixKey: string) {
@@ -33,7 +27,7 @@ class CamerasApi {
 
   allCameras = () => {
     return queryOptions({
-      queryKey: [this.baseKey, 'all'],
+      queryKey: [this.baseKey, "all"],
       queryFn: ({ signal }) =>
         apiInstance<GetAllCamerasResponse>({
           type: ApiTypeValues.MAIN,
@@ -45,15 +39,15 @@ class CamerasApi {
 
   getCameraById = ({ id }: GetCameraByIdParams) => {
     return queryOptions({
-      queryKey: [this.baseKey, 'getCameraById', id],
+      queryKey: [this.baseKey, "getCameraById", id],
       queryFn: ({ signal }) =>
         apiInstance<GetCameraByIdResponse>({
           type: ApiTypeValues.MAIN,
           path: `${this.baseKey}/${id}`,
           signal,
         }),
-    })
-  }
+    });
+  };
 
   addCamera = ({ body }: AddCameraParams) => {
     return apiInstance<AddCameraResponse>({
@@ -62,7 +56,7 @@ class CamerasApi {
       method: ApiMethodValues.POST,
       body: body,
     });
-  }
+  };
 
   editCamera = ({ id, body }: EditCameraParams) => {
     return apiInstance<EditCameraResponse>({
@@ -71,7 +65,7 @@ class CamerasApi {
       method: ApiMethodValues.PATCH,
       body: body,
     });
-  }
+  };
 
   deleteCamera = ({ id }: DeleteCameraParams) => {
     return apiInstance<DeleteCameraResponse>({
@@ -79,45 +73,43 @@ class CamerasApi {
       path: `${this.baseKey}/${id}`,
       method: ApiMethodValues.DELETE,
     });
-  }
-
-
+  };
 
   getAllUsersCameras = () => {
     return queryOptions({
-      queryKey: [this.baseKey, 'getAllUsersCameras'],
+      queryKey: [this.baseKey, "getAllUsersCameras"],
       queryFn: ({ signal }) =>
         apiInstance<GetAllUsersCamerasResponse>({
           type: ApiTypeValues.MAIN,
           path: `${this.baseKey}/user/all`,
           signal,
         }),
-    })
-  }
+    });
+  };
 
   getCamerasByUser = ({ id }: GetCamerasByUserParams) => {
     return queryOptions({
-      queryKey: [this.baseKey, 'getCamerasByUser', id],
+      queryKey: [this.baseKey, "getCamerasByUser", id],
       queryFn: ({ signal }) =>
         apiInstance<GetCamerasByUserResponse>({
           type: ApiTypeValues.MAIN,
           path: `${this.baseKey}/user/${id}`,
           signal,
         }),
-    })
-  }
+    });
+  };
 
   getUserCamerasById = ({ id }: GetUserCamerasByIdParams) => {
     return queryOptions({
-      queryKey: [this.baseKey, 'getUserCamerasById', id],
+      queryKey: [this.baseKey, "getUserCamerasById", id],
       queryFn: ({ signal }) =>
         apiInstance<GetUserCamerasByIdResponse>({
           type: ApiTypeValues.MAIN,
           path: `${this.baseKey}/user/${id}`,
           signal,
         }),
-    })
-  }
+    });
+  };
 }
 
-export const camerasApi = new CamerasApi('cameras');
+export const camerasApi = new CamerasApi("cameras");

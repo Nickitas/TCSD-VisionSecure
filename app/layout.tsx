@@ -1,5 +1,5 @@
 import "@/_kernel/assets/styles/globals.css";
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
 
@@ -7,7 +7,7 @@ import { Providers } from "./providers";
 
 import { siteConfig } from "@/_kernel/config/site.config";
 import { fontSans } from "@/_kernel/assets/styles/fonts";
-import { Navbar } from '@/widgets/Navbar';
+import { Navbar } from "@/widgets/Navbar";
 
 export const metadata: Metadata = {
   title: {
@@ -27,11 +27,7 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html suppressHydrationWarning lang="en">
       <head />

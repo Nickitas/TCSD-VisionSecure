@@ -1,1 +1,1 @@
-export { rolesConfig } from './roles.config';
+export { rolesConfig } from "./roles.config";

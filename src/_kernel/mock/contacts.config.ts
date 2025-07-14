@@ -1,7 +1,7 @@
 export const contactsConfig = {
   header: {
     title: "Контакты",
-    subtitle: "Свяжитесь с нами любым удобным способом"
+    subtitle: "Свяжитесь с нами любым удобным способом",
   },
   contactMethods: {
     title: "Способы связи",
@@ -9,32 +9,32 @@ export const contactsConfig = {
       {
         title: "Электронная почта",
         value: "contact@visionsecure.example",
-        icon: "email" 
+        icon: "email",
       },
       {
         title: "Телефон",
         value: "+7 (XXX) XXX-XX-XX",
-        icon: "phone"
+        icon: "phone",
       },
       {
         title: "Техническая поддержка",
         value: "support@visionsecure.example",
-        icon: "support"
-      }
-    ]
+        icon: "support",
+      },
+    ],
   },
   offices: {
     title: "Наши офисы",
     items: [
       {
         city: "Москва",
-        address: "ул. Примерная, д. 123, офис 456"
+        address: "ул. Примерная, д. 123, офис 456",
       },
       {
         city: "Санкт-Петербург",
-        address: "Невский пр-т, д. 789, офис 101"
-      }
-    ]
+        address: "Невский пр-т, д. 789, офис 101",
+      },
+    ],
   },
   form: {
     title: "Напишите нам",
@@ -42,8 +42,8 @@ export const contactsConfig = {
       name: "Ваше имя",
       email: "Электронная почта",
       message: "Сообщение",
-      submit: "Отправить"
+      submit: "Отправить",
     },
-    successMessage: "Спасибо! Ваше сообщение отправлено."
+    successMessage: "Спасибо! Ваше сообщение отправлено.",
   },
 };

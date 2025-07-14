@@ -1,7 +1,5 @@
-import { Account } from '@/views/account/Account';
+import { Account } from "@/views/account/Account";
 
 export default function AccountPage() {
-  return (
-    <Account />
-  );
+  return <Account />;
 }

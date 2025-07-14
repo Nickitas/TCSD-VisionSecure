@@ -1,1 +1,1 @@
-export { numberConvert } from './number-convert.helper';
+export { numberConvert } from "./number-convert.helper";

@@ -1,0 +1,1 @@
+export { camerasMock } from "./cameras";

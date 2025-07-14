@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-require('./envValidator');
+require("./envValidator");
 
 const nextConfig = {
   reactStrictMode: true,
@@ -8,8 +8,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/api/:path*',
-        destination: 'https://visionsecure.donstu.ru/:path*',
+        source: "/api/:path*",
+        destination: "https://visionsecure.donstu.ru/:path*",
       },
     ];
   },
