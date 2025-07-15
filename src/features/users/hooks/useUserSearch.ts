@@ -11,8 +11,8 @@ export const useUserSearch = (users: User[]) => {
       user.email.toLowerCase().includes(searchLower) ||
       user.first_name.toLowerCase().includes(searchLower) ||
       user.last_name.toLowerCase().includes(searchLower) ||
-      user.paternal_name.toLowerCase().includes(searchLower) ||
-      user.phone_number.toLowerCase().includes(searchLower) ||
+      user.paternal_name && user.paternal_name.toLowerCase().includes(searchLower) ||
+      user.phone_number && user.phone_number.toLowerCase().includes(searchLower) ||
       `${user.last_name} ${user.first_name} ${user.paternal_name}`
         .toLowerCase()
         .includes(searchLower)

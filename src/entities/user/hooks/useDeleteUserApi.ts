@@ -3,6 +3,10 @@ import { addToast } from "@heroui/toast";
 import { userApi } from "../api";
 import { DeleteUserParams } from "../types";
 
+/**
+ * Хук для удаления пользователя
+ * @returns {Object} Объект с функциями мутации и состоянием выполнения
+ */
 export const useDeleteUser = () => {
   const deleteUserMutation = useMutation<void, Error, DeleteUserParams>({
     mutationFn: userApi.deleteUser,

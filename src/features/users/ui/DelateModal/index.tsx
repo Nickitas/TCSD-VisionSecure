@@ -1,10 +1,11 @@
 import React, { FC, useRef, useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, useDraggable } from "@heroui/modal";
 import { Button } from "@heroui/button";
-import { useDeleteUser } from "@/entities/user/hooks";
 import { Input } from "@heroui/input";
 import { Spinner } from "@heroui/spinner";
+import { useDeleteUser } from "@/entities/user/hooks";
 import { useDelateModalStore } from "../../model";
+import { usersMock } from '@/entities/user/mock';
 
 export const DelateModal: FC = () => {
   const targetRef = useRef(null);
@@ -18,12 +19,18 @@ export const DelateModal: FC = () => {
 
   const { handleDelete, isPending } = useDeleteUser();
 
+  if (!userId) {
+    return null;
+  }
+
+  const userFio = `${usersMock[+userId].last_name} ${usersMock[+userId].first_name} ${usersMock[+userId].paternal_name}`;
+
   const handleConfirm = () => {
     if (userId === null) {
       return;
     }
 
-    if (confirmationPhrase !== "Иван Иванович Иванов") {
+    if (confirmationPhrase !== userFio) {
       return;
     }
 
@@ -52,8 +59,8 @@ export const DelateModal: FC = () => {
                     size="sm"
                     name="confirmation_phrase"
                     type="confirmation"
-                    label="Введите ФИО чтобы подтвердить удаление"
-                    placeholder="Иван Иванович Иванов"
+                    label="Введите ФИО чтобы подтвердить удаление * "
+                    placeholder={userFio}
                     required
                     disabled={isPending}
                   />

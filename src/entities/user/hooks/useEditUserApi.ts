@@ -19,8 +19,8 @@ export const useEditUser = () => {
     },
     onSuccess: () => {
       addToast({
-        title: "Изменение успешно",
-        description: "Изменение прошло успешно",
+        title: "Изменения сохранены",
+        description: "Данные пользователя успешно обновлены",
         color: "success",
       });
     },
@@ -37,6 +37,10 @@ export const useEditUser = () => {
     const phone_number = formData.get("phone_number") as string;
     const role = formData.get("role") as UserRole;
     const ban = (formData.get("ban") as string) === "true";
+    const position = formData.get("position") as string;
+    const department = formData.get("department") as string;
+    const room = formData.get("room") as string;
+    const internal_phone = formData.get("internal_phone") as string;
 
     const body = {
       email,
@@ -46,6 +50,10 @@ export const useEditUser = () => {
       phone_number,
       role,
       ban,
+      position,
+      department,
+      room,
+      internal_phone
     };
 
     return editUserMutation.mutateAsync({ id, body });

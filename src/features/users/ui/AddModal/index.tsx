@@ -5,6 +5,8 @@ import { useRegister } from "@/entities/user/hooks";
 import { Input } from "@heroui/input";
 import { Spinner } from "@heroui/spinner";
 import { useAddModalStore } from "../../model";
+import { userRoleOptions } from '../../config';
+import { Select, SelectItem } from '@heroui/select';
 
 export const AddModal: FC = () => {
   const targetRef = useRef(null);
@@ -21,6 +23,7 @@ export const AddModal: FC = () => {
       ref={targetRef}
       isOpen={isOpen}
       onOpenChange={onClose}
+      size="xl"
       backdrop={"blur"}
       scrollBehavior="inside"
     >
@@ -31,81 +34,144 @@ export const AddModal: FC = () => {
               Создание
             </ModalHeader>
             <ModalBody>
-              <form className="space-y-6" onSubmit={handleRegister}>
+              <form className="space-y-4" onSubmit={handleRegister}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Input
-                    id="first_name"
-                    size="sm"
-                    name="first_name"
-                    type="first_name"
-                    label="Имя"
-                    placeholder="Иван"
-                    required
-                    disabled={isPending}
-                  />
-                  <Input
-                    id="paternal_name"
-                    size="sm"
-                    name="paternal_name"
-                    type="paternal_name"
-                    label="Отчество"
-                    placeholder="Владимирович"
-                    required
-                    disabled={isPending}
-                  />
+                  <div className="space-y-2">
+                    <Input
+                      id="first_name"
+                      size="sm"
+                      name="first_name"
+                      type="text"
+                      label="Имя *"
+                      placeholder="Сергей"
+                      required
+                      disabled={isPending}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Input
+                      id="paternal_name"
+                      size="sm"
+                      name="paternal_name"
+                      type="text"
+                      label="Отчество"
+                      placeholder="Владимирович"
+                      disabled={isPending}
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
                   <Input
                     id="last_name"
                     size="sm"
                     name="last_name"
-                    type="last_name"
-                    label="Фамилия"
-                    placeholder="Иванов"
-                    required
-                    disabled={isPending}
-                  />
-                  <Input
-                    id="phone_number"
-                    size="sm"
-                    name="phone_number"
-                    type="phone_number"
-                    label="Номер телефона"
-                    placeholder="(900) 000-00-00"
-                    required
-                    disabled={isPending}
-                  />
-                  <Input
-                    id="email"
-                    size="sm"
-                    name="email"
-                    type="email"
-                    label="Email"
-                    placeholder="your@email.com"
-                    required
-                    disabled={isPending}
-                  />
-                  <Input
-                    id="password"
-                    size="sm"
-                    name="password"
-                    type="password"
-                    label="Пароль"
-                    placeholder="••••••••"
+                    type="text"
+                    label="Фамилия *"
+                    placeholder="Панов"
                     required
                     disabled={isPending}
                   />
                 </div>
-                <div className="flex justify-end gap-4">
-                  <Button color="danger" variant="light" onPress={onClose}>
-                    Закрыть
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Input
+                      id="phone_number"
+                      size="sm"
+                      name="phone_number"
+                      type="tel"
+                      label="Номер телефона"
+                      placeholder="+7 (900) 000-00-00"
+                      disabled={isPending}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Input
+                      id="email"
+                      size="sm"
+                      name="email"
+                      type="email"
+                      label="Email *"
+                      placeholder="spanov@donstu.ru"
+                      required
+                      disabled={isPending}
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Input
+                      id="position"
+                      size="sm"
+                      name="position"
+                      type="text"
+                      label="Должность"
+                      placeholder="Начальник отдела"
+                      disabled={isPending}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Input
+                      id="department"
+                      size="sm"
+                      name="department"
+                      type="text"
+                      label="Подразделение"
+                      placeholder="ОСТК"
+                      disabled={isPending}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Input
+                      id="room"
+                      size="sm"
+                      name="room"
+                      type="text"
+                      label="Аудитория"
+                      placeholder="1-391а"
+                      disabled={isPending}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Input
+                      id="internal_phone"
+                      size="sm"
+                      name="internal_phone"
+                      type="text"
+                      label="Внутренний номер"
+                      placeholder="238-17-13"
+                      disabled={isPending}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Select
+                    className="w-full"
+                    items={userRoleOptions}
+                    label="Роль пользователя *"
+                    placeholder="Выберите роль..."
+                    disabled={isPending}
+                    required
+                  >
+                    {(role) => <SelectItem key={role.value}>{role.text}</SelectItem>}
+                  </Select>
+                </div>
+
+                <div className="flex justify-end gap-4 pt-4">
+                  <Button color="danger" variant="light" onPress={onClose} disabled={isPending}>
+                    Отмена
                   </Button>
-                  <Button type="submit" disabled={isPending}>
+                  <Button type="submit" color="primary" disabled={isPending}>
                     {isPending ? (
                       <div className="flex items-center justify-center">
-                        <Spinner className="mr-2" />
+                        <Spinner size="sm" className="mr-2" />
                         Регистрация...
                       </div>
                     ) : (
-                      "Продолжить"
+                      "Зарегистрировать"
                     )}
                   </Button>
                 </div>

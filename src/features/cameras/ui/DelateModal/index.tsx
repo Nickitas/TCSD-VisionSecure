@@ -1,9 +1,9 @@
 import React, { FC, useRef, useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, useDraggable } from "@heroui/modal";
 import { Button } from "@heroui/button";
-import { useDeleteUser } from "@/entities/user/hooks";
 import { Input } from "@heroui/input";
 import { Spinner } from "@heroui/spinner";
+import { useDeleteCamera } from "@/entities/cameras/hooks";
 import { useDelateModalStore } from "../../model";
 
 export const DelateModal: FC = () => {
@@ -16,14 +16,14 @@ export const DelateModal: FC = () => {
 
   const { moveProps } = useDraggable({ targetRef, isDisabled: !isOpen });
 
-  const { handleDelete, isPending } = useDeleteUser();
+  const { handleDelete, isPending } = useDeleteCamera();
 
   const handleConfirm = () => {
     if (cameraId === null) {
       return;
     }
 
-    if (confirmationPhrase !== "Иван Иванович Иванов") {
+    if (confirmationPhrase !== "да") {
       return;
     }
 
@@ -52,8 +52,8 @@ export const DelateModal: FC = () => {
                     size="sm"
                     name="confirmation_phrase"
                     type="confirmation"
-                    label="Введите ФИО чтобы подтвердить удаление"
-                    placeholder="Иван Иванович Иванов"
+                    label="Подтверждение действия *"
+                    placeholder={`Введите "да", чтобы подтвердить удаление`}
                     required
                     disabled={isPending}
                   />

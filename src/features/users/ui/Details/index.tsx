@@ -15,19 +15,24 @@ import {
   PhoneIcon,
   ShieldCheckIcon,
   UserCircleIcon,
+  BuildingOfficeIcon,
+  IdentificationIcon,
+  HomeModernIcon,
+  PhoneArrowDownLeftIcon
 } from "@heroicons/react/24/outline";
 
 import { appRouting } from "@/_kernel/config/app.routing.config";
 import { UserRoleChip } from "@/shared/ui/chips/UserRoleChip";
 import { HeroSection } from "@/widgets/HeroSection";
-import { User } from "@/entities/user/types";
+import { UserId } from "@/entities/user/types";
 import { usersMock } from "@/entities/user/mock";
 import { useEditModalStore } from "../../model";
 import { EditModal } from "../EditModal";
 
-type UserId = Pick<User, "id">;
 
-type UserDetailsProps = UserId;
+type UserDetailsProps = {
+  id: UserId;
+};
 
 export const UserDetails: FC<UserDetailsProps> = ({ id }) => {
   const user = usersMock[Number(id)];
@@ -60,7 +65,7 @@ export const UserDetails: FC<UserDetailsProps> = ({ id }) => {
     <>
       <section className="flex flex-col gap-6">
         <HeroSection
-          title={`${user.last_name} ${user.first_name[0]}. ${user.paternal_name[0]}.`}
+          title={`${user.last_name} ${user.first_name[0]}. ${user?.paternal_name &&user.paternal_name[0]}.`}
           subtitle="Детальная информация о пользователе"
           startContent={
             <Button
@@ -73,16 +78,17 @@ export const UserDetails: FC<UserDetailsProps> = ({ id }) => {
           }
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 px-4 sm:px-6">
+        <div className="grid grid-cols-1 items-start lg:grid-cols-3 gap-6 px-4 sm:px-6">
           {/* Профиль пользователя */}
-          <Card className="dark:bg-[#f1f1f10c]  rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+          <Card className="dark:bg-[#f1f1f10c] rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
             <div className="p-6 flex flex-col items-center text-center">
               <div className="relative w-32 h-32 mb-4 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-md">
                 <UserComponent
-                  avatarProps={{
-                    src: "",
+                  classNames={{
+                    name: "w-0 h-0",
                   }}
-                  name=""
+                  avatarProps={{ src: "", }}
+                  name={null}
                   className="w-full h-full object-cover"
                 />
                 <div
@@ -109,7 +115,7 @@ export const UserDetails: FC<UserDetailsProps> = ({ id }) => {
             <div className="border-t border-gray-200 dark:border-gray-700 p-4">
               <div className="flex gap-2">
                 <Button
-                  color="success"
+                  color="primary"
                   variant="bordered"
                   onPress={handleModalEdit}
                   className="flex items-center gap-1"
@@ -158,7 +164,51 @@ export const UserDetails: FC<UserDetailsProps> = ({ id }) => {
                   <PhoneIcon className="w-5 h-5 text-gray-500 dark:text-gray-400 mr-3 mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Телефон</p>
-                    <p className="text-gray-900 dark:text-white">{user.phone_number}</p>
+                    <p className="text-gray-900 dark:text-white">{user?.phone_number || 'Не указан'}</p>
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            {/* Рабочая информация */}
+            <Card className="dark:bg-[#f1f1f10c] rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                <BuildingOfficeIcon className="w-5 h-5 mr-2" />
+                Рабочая информация
+              </h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex items-start">
+                  <IdentificationIcon className="w-5 h-5 text-gray-500 dark:text-gray-400 mr-3 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Должность</p>
+                    <p className="text-gray-900 dark:text-white">{user.position || "Не указана"}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <BuildingOfficeIcon className="w-5 h-5 text-gray-500 dark:text-gray-400 mr-3 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Подразделение</p>
+                    <p className="text-gray-900 dark:text-white">{user.department || "Не указано"}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <HomeModernIcon className="w-5 h-5 text-gray-500 dark:text-gray-400 mr-3 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Аудитория</p>
+                    <p className="text-gray-900 dark:text-white">
+                      {user.room ? `№${user.room}` : "Не указана"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <PhoneArrowDownLeftIcon className="w-5 h-5 text-gray-500 dark:text-gray-400 mr-3 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Внутренний номер</p>
+                    <p className="text-gray-900 dark:text-white">{user.internal_phone || "Не указан"}</p>
                   </div>
                 </div>
               </div>

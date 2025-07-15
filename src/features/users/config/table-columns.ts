@@ -3,7 +3,6 @@ export const columns = [
   { name: "ПОЛЬЗОВАТЕЛЬ", uid: "user" },
   { name: "РОЛЬ", uid: "role" },
   { name: "СТАТУС", uid: "ban" },
-  { name: "ДАТА СОЗДАНИЯ", uid: "created_at" },
-  { name: "ДАТА ОБНОВЛЕНИЯ", uid: "updated_at" },
+  { name: "ДОЛЖНОСТЬ", uid: "position" },
   { name: "ДЕЙСТВИЯ", uid: "actions" },
 ];

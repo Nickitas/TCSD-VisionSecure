@@ -69,10 +69,17 @@ export const UsersTable: FC<UsersTableProps> = ({ users }) => {
             )}
           </p>
         );
-      case "created_at":
-        return <p className="text-sm">{user.created_at.toLocaleDateString("ru-RU")}</p>;
-      case "updated_at":
-        return <p className="text-sm">{user.updated_at.toLocaleDateString("ru-RU")}</p>;
+      case "position":
+        return (
+          <div className="flex flex-col gap-2">
+            <p className="text-sm">{user.position || "-"}</p>
+            <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+              {`${user.department || " - "}, ${user.room ? `№${user.room}` : "-"}`}
+            </p>
+          </div>
+        );
+      case "internal_phone":
+        return <p className="text-sm">{user.internal_phone || "-"}</p>;
       case "actions":
         return (
           <div className="relative flex items-center gap-2">
@@ -111,7 +118,7 @@ export const UsersTable: FC<UsersTableProps> = ({ users }) => {
         {(column) => (
           <TableColumn
             key={column.uid}
-            align={["ban", "actions"].includes(column.uid) ? "center" : "start"}
+            align={["ban", "role", "actions"].includes(column.uid) ? "center" : "start"}
           >
             {column.name}
           </TableColumn>

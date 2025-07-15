@@ -2,12 +2,12 @@ export interface Camera {
   id: string;
 
   name: string;
-  model: string;
+  model?: string;
   ipAddress: string;
   streamUrl: string;
 
   location: string;
-  description: string;
+  description?: string;
   coordinates?: string | null;
 
   status: "online" | "offline" | "unknown";

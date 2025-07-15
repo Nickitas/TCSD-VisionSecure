@@ -1,13 +1,12 @@
-import { UserRole } from "./user.role";
+import { User } from './user.interface';
 
-export type RegisterParams = {
-  email: string;
-  first_name: string;
-  last_name: string;
-  paternal_name: string;
-  phone_number: string;
-  role: UserRole;
-  password: string;
-};
+export type RegisterParams = Omit<
+    User, 
+    | "id" 
+    | "password" 
+    | "ban"
+    | "created_at" 
+    | "updated_at"
+  >;
 
 export type RegisterResponse = {};

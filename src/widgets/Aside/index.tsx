@@ -36,12 +36,24 @@ export const Aside: FC = () => {
   const pathname = usePathname();
   const { handleLogout } = useLogout();
 
+  const getActiveKey = () => {
+    const sortedKeys = siteConfig.navItems
+      .map(item => item.key)
+      .sort((a, b) => b.length - a.length);
+
+    const activeKey = sortedKeys.find(key =>
+      pathname.startsWith(key)
+    );
+
+    return activeKey || pathname;
+  };
+
   return (
     <aside className="hidden sm:flex flex-col gap-5 w-[180px] p-2">
       <Tabs
-        aria-label="main navigation"
+        aria-label="Главная навигация"
         isVertical={true}
-        selectedKey={pathname}
+        selectedKey={getActiveKey()}
         classNames={{
           base: "flex flex-col gap-1 w-full",
           tabContent: "w-full flex items-center gap-2 text-sm",

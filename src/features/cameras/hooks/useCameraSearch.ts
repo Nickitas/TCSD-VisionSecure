@@ -15,7 +15,7 @@ export const useCameraSearch = (cameras: Camera[]) => {
         const searchLower = searchValue.toLowerCase();
         return (
           camera.name.toLowerCase().includes(searchLower) ||
-          camera.model.toLowerCase().includes(searchLower) ||
+          camera.model && camera.model.toLowerCase().includes(searchLower) ||
           camera.ipAddress.toLowerCase().includes(searchLower) ||
           camera.location.toLowerCase().includes(searchLower)
         );

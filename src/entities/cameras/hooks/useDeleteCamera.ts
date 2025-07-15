@@ -1,47 +1,42 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
+import { addToast } from '@heroui/toast';
 import { camerasApi } from "../api";
-import type { DeleteCameraParams, DeleteCameraResponse } from "../types";
+import { DeleteCameraParams } from '../types';
 
 /**
  * Хук для удаления камеры
  * @returns {Object} Объект с функциями мутации и состоянием выполнения
  */
 export function useDeleteCamera() {
-  const queryClient = useQueryClient();
-
-  const {
-    mutate: deleteCamera,
-    mutateAsync: deleteCameraAsync,
-    isPending: isDeleting,
-    isError: isDeleteError,
-    error: deleteError,
-    isSuccess: isDeleteSuccess,
-    reset: resetDeleteCamera,
-  } = useMutation<DeleteCameraResponse, Error, DeleteCameraParams>({
+  const deleteCameraMutation = useMutation({
     mutationFn: camerasApi.deleteCamera,
-    onSuccess: (data, variables) => {
-      // Инвалидируем кэш списка камер и конкретной камеры
-      queryClient.invalidateQueries({
-        queryKey: ["deleteCamera"],
-      });
-      queryClient.removeQueries({
-        queryKey: ["deleteCamera", variables.id],
+
+    onError: (err) => {
+      addToast({
+        title: "Ошибка удаления",
+        description: err.message,
+        color: "danger",
       });
     },
-    onError: (error) => {
-      console.error("Error deleting camera:", error);
-      return error;
+
+    onSuccess: () => {
+      addToast({
+        title: "Удаление успешно",
+        description: "Камера была успешно удалена",
+        color: "success",
+      });
     },
-    throwOnError: false,
   });
 
-  return {
-    deleteCamera,
-    deleteCameraAsync,
-    isDeleting,
-    isDeleteError,
-    deleteError,
-    isDeleteSuccess,
-    resetDeleteCamera,
+  const handleDelete = async (id: DeleteCameraParams["id"]) => {
+    return deleteCameraMutation.mutateAsync({ id });
+  };
+
+    return {
+    handleDelete,
+    isPending: deleteCameraMutation.isPending,
+    isSuccess: deleteCameraMutation.isSuccess,
+    isError: deleteCameraMutation.isError,
+    error: deleteCameraMutation.error,
   };
 }

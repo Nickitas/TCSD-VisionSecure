@@ -12,6 +12,10 @@ export const usersMock: User[] = [
     ban: false,
     created_at: new Date("2024-01-15T10:00:00Z"),
     updated_at: new Date("2025-07-01T12:30:00Z"),
+    position: "Главный администратор системы",
+    department: "IT-отдел",
+    room: "101",
+    internal_phone: "1001"
   },
   {
     id: "2",
@@ -24,6 +28,10 @@ export const usersMock: User[] = [
     ban: true,
     created_at: new Date("2024-03-20T14:20:00Z"),
     updated_at: new Date("2025-06-15T09:10:00Z"),
+    position: "Менеджер по продажам",
+    department: "Коммерческий отдел",
+    room: "205",
+    internal_phone: "2051"
   },
   {
     id: "3",
@@ -36,6 +44,10 @@ export const usersMock: User[] = [
     ban: false,
     created_at: new Date("2024-05-10T08:45:00Z"),
     updated_at: new Date("2025-07-05T16:25:00Z"),
+    position: "Начальник отдела кадров",
+    department: "HR-отдел",
+    room: "310",
+    internal_phone: "3101"
   },
   {
     id: "4",
@@ -48,6 +60,10 @@ export const usersMock: User[] = [
     ban: false,
     created_at: new Date("2024-07-01T11:15:00Z"),
     updated_at: new Date("2025-07-08T13:40:00Z"),
+    position: "Бухгалтер",
+    department: "Финансовый отдел",
+    room: "412",
+    internal_phone: "4121"
   },
   {
     id: "5",
@@ -60,6 +76,10 @@ export const usersMock: User[] = [
     ban: false,
     created_at: new Date("2024-09-12T09:30:00Z"),
     updated_at: new Date("2025-07-03T10:50:00Z"),
+    position: "Инженер",
+    department: "Технический отдел",
+    room: "503",
+    internal_phone: "5031"
   },
   {
     id: "6",
@@ -72,6 +92,10 @@ export const usersMock: User[] = [
     ban: true,
     created_at: new Date("2024-02-25T15:55:00Z"),
     updated_at: new Date("2025-06-20T11:05:00Z"),
+    position: "Маркетолог",
+    department: "Отдел маркетинга",
+    room: "615",
+    internal_phone: "6151"
   },
   {
     id: "7",
@@ -84,6 +108,10 @@ export const usersMock: User[] = [
     ban: false,
     created_at: new Date("2024-04-18T12:10:00Z"),
     updated_at: new Date("2025-07-07T14:15:00Z"),
+    position: "Системный администратор",
+    department: "IT-отдел",
+    room: "101",
+    internal_phone: "1002"
   },
   {
     id: "8",
@@ -96,6 +124,10 @@ export const usersMock: User[] = [
     ban: false,
     created_at: new Date("2024-06-30T13:25:00Z"),
     updated_at: new Date("2025-07-02T08:35:00Z"),
+    position: "Ассистент",
+    department: "Администрация",
+    room: "720",
+    internal_phone: "7201"
   },
   {
     id: "9",
@@ -108,6 +140,10 @@ export const usersMock: User[] = [
     ban: false,
     created_at: new Date("2024-08-05T10:40:00Z"),
     updated_at: new Date("2025-07-06T17:00:00Z"),
+    position: "Аналитик",
+    department: "Аналитический отдел",
+    room: "808",
+    internal_phone: "8081"
   },
   {
     id: "10",
@@ -120,5 +156,9 @@ export const usersMock: User[] = [
     ban: false,
     created_at: new Date("2024-10-22T16:05:00Z"),
     updated_at: new Date("2025-07-09T09:20:00Z"),
+    position: "Руководитель отдела разработки",
+    department: "IT-отдел",
+    room: "101",
+    internal_phone: "1003"
   },
 ];

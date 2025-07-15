@@ -24,8 +24,8 @@ export function useRegister() {
     },
     onSuccess: () => {
       addToast({
-        title: "Регистрация прошла успешно",
-        description: "Регистрация прошла успешно",
+        title: "Успешно",
+        description: "Регистрация пользователя прошла успешно",
         color: "success",
       });
 
@@ -37,16 +37,33 @@ export function useRegister() {
     return new Promise<typeof createRegisterMutation.data>((onSettled) => {
       e.preventDefault();
       const formData = new FormData(e.currentTarget);
+
       const email = formData.get("email") as string;
       const first_name = formData.get("first_name") as string;
       const last_name = formData.get("last_name") as string;
       const paternal_name = formData.get("paternal_name") as string;
       const phone_number = formData.get("phone_number") as string;
-      const role = UserRole.USER;
-      const password = formData.get("password") as string;
+      const role = (formData.get("role") || UserRole.USER) as UserRole;
+      const position = formData.get("position") as string;
+      const department = formData.get("department") as string;
+      const room = formData.get("room") as string;
+      const internal_phone = formData.get("internal_phone") as string;
+
+      const body = {
+        email,
+        first_name,
+        last_name,
+        paternal_name,
+        phone_number,
+        role,
+        position,
+        department,
+        room,
+        internal_phone,
+      };
 
       createRegisterMutation.mutate(
-        { email, first_name, last_name, paternal_name, phone_number, role, password },
+        body,
         { onSettled },
       );
     });

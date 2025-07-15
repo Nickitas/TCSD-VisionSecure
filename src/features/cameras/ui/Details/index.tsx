@@ -128,13 +128,13 @@ export const CameraDetails: FC<CameraDetailsProps> = ({ id }) => {
               <li className="flex items-center">
                 <MapPinIcon className="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" />
                 <span className="text-gray-600 dark:text-gray-300">
-                  <span className="font-medium">Координаты:</span> {camera.coordinates}
+                  <span className="font-medium"></span> {camera.coordinates}
                 </span>
               </li>
               <li className="flex items-center">
                 <ClockIcon className="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" />
                 <span className="text-gray-600 dark:text-gray-300">
-                  <span className="font-medium">Последняя активность:</span>{" "}
+                  <span className="font-medium">Активность:</span>{" "}
                   {formatTime(camera.lastActive.toISOString())}
                 </span>
               </li>
