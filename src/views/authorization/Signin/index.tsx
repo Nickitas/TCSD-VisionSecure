@@ -13,7 +13,7 @@ export const Signin: FC = () => {
 
   return (
     <>
-      <Card className="w-full max-w-md p-8 space-y-6">
+      <Card className="w-full max-w-md m-auto p-8 space-y-6">
         <div className="text-center">
           <h1 className={title({ size: "sm" })}>Авторизация</h1>
           <p className={text()}>Введите свои учетные данные для входа</p>
@@ -46,10 +46,10 @@ export const Signin: FC = () => {
             />
           </div>
 
-          <Button type="submit" className="w-full" disabled={isPending}>
+          <Button size='lg' color='primary' type="submit" className="w-full" disabled={isPending}>
             {isPending ? (
               <div className="flex items-center justify-center">
-                <Spinner className="mr-2" />
+                <Spinner color='white' size='sm' className="mr-2" />
                 Вход...
               </div>
             ) : (

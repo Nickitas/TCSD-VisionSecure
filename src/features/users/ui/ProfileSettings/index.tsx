@@ -5,103 +5,133 @@ import { Card } from '@heroui/card';
 import { Switch } from '@heroui/switch';
 import { Select, SelectItem } from '@heroui/select';
 import { Button } from '@heroui/button';
-import { SunIcon, MoonIcon, BellIcon, EyeIcon, LanguageIcon } from '@heroicons/react/24/outline';
 import { Divider } from "@heroui/divider";
+import {
+    SunIcon,
+    MoonIcon,
+    BellIcon,
+    EyeIcon,
+    LanguageIcon,
+    CogIcon,
+    DevicePhoneMobileIcon,
+    EnvelopeIcon
+} from '@heroicons/react/24/outline';
+import {
+    DEFAULT_SETTINGS,
+    SETTINGS_OPTIONS
+} from '../../config/profile-settings.config';
 
 export const ProfileSettings: FC = () => {
     return (
-        <div className="flex flex-col gap-6 mb-20">
+        <div className="flex flex-col gap-6 mb-20 max-w-4xl mx-auto w-full px-4">
             {/* Внешний вид */}
-            <Card className="p-6">
+            <Card className="p-6 shadow-sm">
                 <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                    <EyeIcon className="w-5 h-5" />
+                    <EyeIcon className="w-5 h-5 text-primary" />
                     Внешний вид
                 </h2>
-                <Divider className='mb-2'/>
+                <Divider className='mb-4' />
 
-                <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <p className="font-medium">Тема оформления</p>
-                            <p className="text-sm text-gray-500">Выберите светлую или темную тему</p>
-                        </div>
-                        <div className="flex gap-2">
-                            <Button
-                                variant="flat"
-                                startContent={<SunIcon className="w-5 h-5" />}
-                                className="px-4"
-                            >
-                                Светлая
-                            </Button>
-                            <Button
-                                variant="flat"
-                                startContent={<MoonIcon className="w-5 h-5" />}
-                                className="px-4"
-                            >
-                                Тёмная
-                            </Button>
+                <div className="space-y-6">
+                    <div className="flex flex-col gap-2">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="font-medium">Тема оформления</p>
+                                <p className="text-sm text-gray-500">Выберите светлую, темную или системную тему</p>
+                            </div>
+                            <div className="flex gap-2">
+                                {SETTINGS_OPTIONS.themes.map((theme) => (
+                                    <Button
+                                        key={theme.value}
+                                        variant="flat"
+                                        startContent={
+                                            theme.value === 'light' ? <SunIcon className="w-5 h-5" /> :
+                                                theme.value === 'dark' ? <MoonIcon className="w-5 h-5" /> :
+                                                    <CogIcon className="w-5 h-5" />
+                                        }
+                                        className="px-4"
+                                        color={DEFAULT_SETTINGS.appearance.theme === theme.value ? 'primary' : 'default'}
+                                    >
+                                        {theme.label}
+                                    </Button>
+                                ))}
+                            </div>
                         </div>
                     </div>
 
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <p className="font-medium">Размер шрифта</p>
-                            <p className="text-sm text-gray-500">Настройте удобный для вас размер текста</p>
+                    <div className="flex flex-col gap-2">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="font-medium">Размер шрифта</p>
+                                <p className="text-sm text-gray-500">Настройте удобный для вас размер текста</p>
+                            </div>
+                            <Select
+                                className="w-60"
+                                defaultSelectedKeys={[DEFAULT_SETTINGS.appearance.fontSize]}
+                                startContent={<span className="text-sm">A</span>}
+                            >
+                                {SETTINGS_OPTIONS.fontSizes.map((size) => (
+                                    <SelectItem key={size.value}>{size.label}</SelectItem>
+                                ))}
+                            </Select>
                         </div>
-                        <Select
-                            className="w-60"
-                            defaultSelectedKeys={['medium']}
-                        >
-                            <SelectItem key="small">Мелкий</SelectItem>
-                            <SelectItem key="medium">Средний</SelectItem>
-                            <SelectItem key="large">Крупный</SelectItem>
-                        </Select>
                     </div>
                 </div>
             </Card>
 
             {/* Уведомления */}
-            <Card className="p-6">
+            <Card className="p-6 shadow-sm">
                 <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                    <BellIcon className="w-5 h-5" />
+                    <BellIcon className="w-5 h-5 text-primary" />
                     Уведомления
                 </h2>
-<Divider className='mb-2'/>
-                <div className="space-y-4">
+                <Divider className='mb-4' />
+
+                <div className="space-y-6">
                     <div className="flex items-center justify-between">
-                        <div>
-                            <p className="font-medium">Email-уведомления</p>
-                            <p className="text-sm text-gray-500">Получать важные уведомления на почту</p>
+                        <div className="flex items-center gap-3">
+                            <EnvelopeIcon className="w-5 h-5 text-gray-400" />
+                            <div>
+                                <p className="font-medium">Email-уведомления</p>
+                                <p className="text-sm text-gray-500">Получать важные уведомления на почту</p>
+                            </div>
                         </div>
-                        <Switch defaultSelected />
+                        <Switch defaultSelected={DEFAULT_SETTINGS.notifications.email} />
                     </div>
 
                     <div className="flex items-center justify-between">
-                        <div>
-                            <p className="font-medium">Push-уведомления</p>
-                            <p className="text-sm text-gray-500">Разрешить уведомления в браузере</p>
+                        <div className="flex items-center gap-3">
+                            <BellIcon className="w-5 h-5 text-gray-400" />
+                            <div>
+                                <p className="font-medium">Push-уведомления</p>
+                                <p className="text-sm text-gray-500">Разрешить уведомления в браузере</p>
+                            </div>
                         </div>
-                        <Switch />
+                        <Switch defaultSelected={DEFAULT_SETTINGS.notifications.push} />
                     </div>
 
                     <div className="flex items-center justify-between">
-                        <div>
-                            <p className="font-medium">Звуковые оповещения</p>
-                            <p className="text-sm text-gray-500">Звук при новых уведомлениях</p>
+                        <div className="flex items-center gap-3">
+                            <DevicePhoneMobileIcon className="w-5 h-5 text-gray-400" />
+                            <div>
+                                <p className="font-medium">Звуковые оповещения</p>
+                                <p className="text-sm text-gray-500">Звук при новых уведомлениях</p>
+                            </div>
                         </div>
-                        <Switch defaultSelected />
+                        <Switch defaultSelected={DEFAULT_SETTINGS.notifications.sound} />
                     </div>
                 </div>
             </Card>
 
             {/* Язык и регион */}
-            <Card className="p-6">
+            <Card className="p-6 shadow-sm">
                 <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                    <LanguageIcon className="w-5 h-5" />
+                    <LanguageIcon className="w-5 h-5 text-primary" />
                     Язык и регион
                 </h2>
-<Divider className='mb-2'/>
-                <div className="space-y-4">
+                <Divider className='mb-4' />
+
+                <div className="space-y-6">
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="font-medium">Язык интерфейса</p>
@@ -109,10 +139,11 @@ export const ProfileSettings: FC = () => {
                         </div>
                         <Select
                             className="w-60"
-                            defaultSelectedKeys={['ru']}
+                            defaultSelectedKeys={[DEFAULT_SETTINGS.locale.language]}
                         >
-                            <SelectItem key="ru">Русский</SelectItem>
-                            <SelectItem key="en">English</SelectItem>
+                            {SETTINGS_OPTIONS.languages.map((lang) => (
+                                <SelectItem key={lang.value}>{lang.label}</SelectItem>
+                            ))}
                         </Select>
                     </div>
 
@@ -123,22 +154,23 @@ export const ProfileSettings: FC = () => {
                         </div>
                         <Select
                             className="w-60"
-                            defaultSelectedKeys={['dmy']}
+                            defaultSelectedKeys={[DEFAULT_SETTINGS.locale.dateFormat]}
                         >
-                            <SelectItem key="dmy">ДД.ММ.ГГГГ</SelectItem>
-                            <SelectItem key="mdy">ММ/ДД/ГГГГ</SelectItem>
-                            <SelectItem key="ymd">ГГГГ-ММ-ДД</SelectItem>
+                            {SETTINGS_OPTIONS.dateFormats.map((format) => (
+                                <SelectItem key={format.value}>{format.label}</SelectItem>
+                            ))}
                         </Select>
                     </div>
 
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="font-medium">Часовой пояс</p>
-                            <p className="text-sm text-gray-500">Автоматически или вручную</p>
+                            <p className="text-sm text-gray-500">{DEFAULT_SETTINGS.locale.timezone === 'auto' ?
+                                'Определяется автоматически' : 'Установлен вручную'}</p>
                         </div>
                         <Select
                             className="w-60"
-                            defaultSelectedKeys={['auto']}
+                            defaultSelectedKeys={[DEFAULT_SETTINGS.locale.timezone === 'auto' ? 'auto' : 'manual']}
                         >
                             <SelectItem key="auto">Определять автоматически</SelectItem>
                             <SelectItem key="manual">Указать вручную</SelectItem>
@@ -148,42 +180,49 @@ export const ProfileSettings: FC = () => {
             </Card>
 
             {/* Конфиденциальность */}
-            <Card className="p-6">
+            <Card className="p-6 shadow-sm">
                 <h2 className="text-xl font-semibold mb-4">
                     Конфиденциальность
                 </h2>
-<Divider className='mb-2'/>
-                <div className="space-y-4">
+                <Divider className='mb-4' />
+
+                <div className="space-y-6">
                     <div className="flex items-center justify-between">
-                        <div>
-                            <p className="font-medium">Показывать email другим пользователям</p>
-                            <p className="text-sm text-gray-500">Будет виден в вашем профиле</p>
+                        <div className="flex items-center gap-3">
+                            <EnvelopeIcon className="w-5 h-5 text-gray-400" />
+                            <div>
+                                <p className="font-medium">Показывать email другим пользователям</p>
+                                <p className="text-sm text-gray-500">Будет виден в вашем профиле</p>
+                            </div>
                         </div>
-                        <Switch />
+                        <Switch defaultSelected={DEFAULT_SETTINGS.privacy.showEmail !== 'none'} />
                     </div>
 
                     <div className="flex items-center justify-between">
-                        <div>
-                            <p className="font-medium">Показывать телефон</p>
-                            <p className="text-sm text-gray-500">Кто может видеть ваш номер телефона</p>
+                        <div className="flex items-center gap-3">
+                            <DevicePhoneMobileIcon className="w-5 h-5 text-gray-400" />
+                            <div>
+                                <p className="font-medium">Показывать телефон</p>
+                                <p className="text-sm text-gray-500">Кто может видеть ваш номер телефона</p>
+                            </div>
                         </div>
                         <Select
                             className="w-60"
-                            defaultSelectedKeys={['nobody']}
+                            defaultSelectedKeys={[DEFAULT_SETTINGS.privacy.showPhone]}
                         >
-                            <SelectItem key="nobody">Никто</SelectItem>
-                            <SelectItem key="contacts">Только контакты</SelectItem>
-                            <SelectItem key="all">Все пользователи</SelectItem>
+                            {SETTINGS_OPTIONS.privacyLevels.map((level) => (
+                                <SelectItem key={level.value}>{level.label}</SelectItem>
+                            ))}
                         </Select>
                     </div>
                 </div>
             </Card>
 
-            <div className="flex justify-end gap-4">
-                <Button variant="bordered" color="danger">
+            <div className="flex justify-end gap-4 sticky bottom-4 bg-white dark:bg-gray-900 p-3 rounded-lg shadow-lg">
+                <Button variant="bordered" color="danger" className="min-w-32">
                     Сбросить настройки
                 </Button>
-                <Button color="primary">
+                <Button color="primary" className="min-w-32">
                     Сохранить изменения
                 </Button>
             </div>
