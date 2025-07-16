@@ -51,7 +51,7 @@ export function useAddCamera() {
       const location = formData.get("location") as string;
       const description = formData.get("description") as string;
       const coordinates = formData.get("coordinates") as string;
-      const fps = Number(formData.get("fps"));
+      const fps = formData.get("fps") as string;
       const resolution = formData.get("resolution") as string;
 
       const body = {

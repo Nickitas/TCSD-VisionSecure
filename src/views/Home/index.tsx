@@ -23,7 +23,7 @@ export const Home: FC = () => {
             color="primary"
             variant='ghost'
             endContent={<ArrowRightIcon className="w-4 h-4" />}
-            href={appRouting.dashboard.cameras.path}
+            href={appRouting.dashboard.main.path}
           >
             Начать
           </Button>

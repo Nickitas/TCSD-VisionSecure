@@ -3,9 +3,11 @@
 import React, { FC, useRef } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, useDraggable } from "@heroui/modal";
 import { Button } from "@heroui/button";
-import { useAddCamera } from "@/entities/cameras/hooks";
+import { Select, SelectItem } from '@heroui/select';
 import { Input } from "@heroui/input";
 import { Spinner } from "@heroui/spinner";
+import { useAddCamera } from "@/entities/cameras/hooks";
+import { cameraFrameratesConfig, cameraResolutionsConfig } from '@/entities/cameras/config';
 import { useAddModalStore } from "../../model";
 
 export const AddModal: FC = () => {
@@ -108,22 +110,34 @@ export const AddModal: FC = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Input
+                    <Select
                       id="resolution"
                       size="sm"
                       name="resolution"
-                      label="Разрешение"
-                      placeholder="1920x1080"
-                    />
+                      label={"Разрешение"}
+                      placeholder={"Укажите разрешение..."}
+                    >
+                      {cameraResolutionsConfig.map((resolution) => (
+                        <SelectItem key={resolution.key}>
+                          {resolution.label}
+                        </SelectItem>
+                      ))}
+                    </Select>
                   </div>
                   <div className="space-y-2">
-                    <Input
+                    <Select
                       id="fps"
                       size="sm"
                       name="fps"
-                      label="FPS"
-                      placeholder="30"
-                    />
+                      label={"FPS"}
+                      placeholder={"Укажите FPS..."}
+                    >
+                      {cameraFrameratesConfig.map((fps) => (
+                        <SelectItem key={fps.key}>
+                          {fps.label}
+                        </SelectItem>
+                      ))}
+                    </Select>
                   </div>
                 </div>
                 <div className="flex justify-end gap-4 pt-4">

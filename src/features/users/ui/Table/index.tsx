@@ -44,6 +44,7 @@ export const UsersTable: FC<UsersTableProps> = ({ users }) => {
           <Tooltip showArrow placement="left" color="default" content="Просмотреть">
             <UserComponent
               as={Link}
+              isFocusable
               href={appRouting.dashboard.user(user.id).path}
               avatarProps={{ radius: "lg", src: "" }}
               description={

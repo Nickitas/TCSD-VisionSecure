@@ -1,47 +1,70 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { FormEvent } from 'react';
+import { useMutation } from "@tanstack/react-query";
+import { addToast } from '@heroui/toast';
 import { camerasApi } from "../api";
-import type { EditCameraParams, EditCameraResponse } from "../types";
+import { CameraId } from '../types';
 
 /**
  * Хук для редактирования камеры
  * @returns {Object} Объект с функциями мутации и состоянием выполнения
  */
 export function useEditCamera() {
-  const queryClient = useQueryClient();
 
-  const {
-    mutate: editCamera,
-    mutateAsync: editCameraAsync,
-    isPending: isEditing,
-    isError: isEditError,
-    error: editError,
-    isSuccess: isEditSuccess,
-    reset: resetEditCamera,
-  } = useMutation<EditCameraResponse, Error, EditCameraParams>({
+  const createEditCameraMutation = useMutation({
     mutationFn: camerasApi.editCamera,
-    onSuccess: (data, variables) => {
-      queryClient.invalidateQueries({
-        queryKey: ["editCamera"],
+
+    onError: (err) => {
+      addToast({
+        title: "Ошибка изменения",
+        description: err.message,
+        color: "danger",
       });
-      queryClient.invalidateQueries({
-        queryKey: ["editCamera", variables.id],
+    },
+    onSuccess: () => {
+      addToast({
+        title: "Изменения сохранены",
+        description: "Данные камеры успешно обновлены",
+        color: "success",
       });
-      return data;
-    },
-    onError: (error) => {
-      console.error("Error editing camera:", error);
-      return error;
-    },
-    throwOnError: false,
+    }
   });
 
+  const handleEdit = async (e: FormEvent<HTMLFormElement>, id: CameraId) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    const name = formData.get("name") as string;
+    const model = formData.get("model") as string;
+    const ipAddress = formData.get("ipAddress") as string;
+    const streamUrl = formData.get("streamUrl") as string;
+    const location = formData.get("location") as string;
+    const description = formData.get("description") as string;
+    const coordinates = formData.get("coordinates") as string;
+    const fps = formData.get("fps") as string;
+    const resolution = formData.get("resolution") as string;
+
+    const body = {
+      name,
+      model,
+      ipAddress,
+      streamUrl,
+      location,
+      description,
+      coordinates,
+      fps,
+      resolution,
+    };
+
+    return createEditCameraMutation.mutateAsync({ id, body });
+  };
+
+
   return {
-    editCamera,
-    editCameraAsync,
-    isEditing,
-    isEditError,
-    editError,
-    isEditSuccess,
-    resetEditCamera,
+    handleEdit,
+    isPending: createEditCameraMutation.isPending,
+    isSuccess: createEditCameraMutation.isSuccess,
+    isError: createEditCameraMutation.isError,
+    error: createEditCameraMutation.error,
+    data: createEditCameraMutation.data,
   };
 }

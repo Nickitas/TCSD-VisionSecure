@@ -1,10 +1,8 @@
+import { FormEvent } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { addToast } from "@heroui/toast";
 import { userApi } from "../api";
-import { FormEvent } from "react";
-import { EditUserParams, UserRole } from "../types";
-
-type UserId = EditUserParams["id"];
+import { EditUserParams, UserId, UserRole } from "../types";
 
 export const useEditUser = () => {
   const editUserMutation = useMutation<void, Error, EditUserParams>({

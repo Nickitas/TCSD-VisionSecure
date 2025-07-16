@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@heroui/button";
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import { aboutConfig } from "@/_kernel/mock/about.config";
-import { title, subtitle, text } from "@/_kernel/assets/styles/primitives";
+import { text } from "@/_kernel/assets/styles/primitives";
 import { GithubIcon } from "@/shared/ui/icons/base";
 import { HeroSection } from "@/widgets/HeroSection";
 

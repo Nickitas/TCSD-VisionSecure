@@ -12,8 +12,9 @@ export interface Camera {
 
   status: "online" | "offline" | "unknown";
 
-  fps?: number | null;
+  fps?: string | null;
   resolution?: string | null;
+  formats?: string | null;
 
   lastActive: Date;
   created_at: Date;

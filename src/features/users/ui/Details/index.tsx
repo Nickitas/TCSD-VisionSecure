@@ -35,7 +35,7 @@ type UserDetailsProps = {
 };
 
 export const UserDetails: FC<UserDetailsProps> = ({ id }) => {
-  const user = usersMock[Number(id)];
+  const user = usersMock[Number(id) - 1];
 
   const userId = useEditModalStore((store) => store.userId);
   const setUserId = useEditModalStore((store) => store.setUserId);
@@ -45,6 +45,10 @@ export const UserDetails: FC<UserDetailsProps> = ({ id }) => {
     onOpen();
     setUserId(user.id);
   };
+
+  if (!user) {
+    return null;
+  }
 
   const statusColor = user.ban ? "bg-red-500" : "bg-green-500";
   const statusIcon = user.ban ? (

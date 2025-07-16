@@ -32,8 +32,10 @@ export const Contacts: FC = () => {
 
   return (
     <>
-      <HeroSection title={"Контакты"} subtitle={"Свяжитесь с нами удобным для вас способом"} />
-
+      <HeroSection 
+        title={"Контакты"} 
+        subtitle={"Свяжитесь с нами удобным для вас способом"} 
+      />
       <div className="grid md:grid-cols-2 gap-6">
         <Card className="dark:bg-[#f1f1f10c] p-2">
           <CardHeader>

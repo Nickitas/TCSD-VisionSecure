@@ -6,24 +6,28 @@ import Link from "next/link";
 import { Button } from "@heroui/button";
 import {
   ArrowLeftIcon,
-  CalendarIcon,
   ClockIcon,
   CogIcon,
   MapPinIcon,
+  DocumentIcon,
   ShieldCheckIcon,
   WifiIcon,
 } from "@heroicons/react/24/outline";
-import { HeroSection } from "@/widgets/HeroSection";
-import { Camera } from "@/entities/cameras/types";
-import { camerasMock } from "@/entities/cameras/mock";
 import { appRouting } from "@/_kernel/config/app.routing.config";
+import { CameraId } from "@/entities/cameras/types";
+import { camerasMock } from "@/entities/cameras/mock";
+import { HeroSection } from "@/widgets/HeroSection";
 
-type CameraId = Pick<Camera, "id">;
-
-type CameraDetailsProps = CameraId;
+type CameraDetailsProps = {
+  id: CameraId;
+};
 
 export const CameraDetails: FC<CameraDetailsProps> = ({ id }) => {
-  const camera = camerasMock[+id];
+  const camera = camerasMock[+id - 1];
+
+  if (!camera) {
+    return null;
+  }
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -118,6 +122,13 @@ export const CameraDetails: FC<CameraDetailsProps> = ({ id }) => {
                   FPS)
                 </span>
               </li>
+              <li className="flex items-center">
+                <DocumentIcon className="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" />
+                <span className="text-gray-600 dark:text-gray-300">
+                  <span className="font-medium">Формат:</span>{" "}
+                  <span className="font-medium"></span> {camera?.formats || "N/A"}
+                </span>
+              </li>
             </ul>
           </div>
 
@@ -135,7 +146,7 @@ export const CameraDetails: FC<CameraDetailsProps> = ({ id }) => {
                 <ClockIcon className="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" />
                 <span className="text-gray-600 dark:text-gray-300">
                   <span className="font-medium">Активность:</span>{" "}
-                  {formatTime(camera.lastActive.toISOString())}
+                  {formatDate(camera.lastActive.toISOString()) + " " + formatTime(camera.lastActive.toISOString())}
                 </span>
               </li>
             </ul>

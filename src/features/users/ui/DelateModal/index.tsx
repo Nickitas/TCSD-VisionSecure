@@ -1,3 +1,5 @@
+"use client";
+
 import React, { FC, useRef, useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, useDraggable } from "@heroui/modal";
 import { Button } from "@heroui/button";

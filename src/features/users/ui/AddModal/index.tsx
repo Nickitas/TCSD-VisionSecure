@@ -1,12 +1,14 @@
+"use client";
+
 import React, { FC, useRef } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, useDraggable } from "@heroui/modal";
 import { Button } from "@heroui/button";
-import { useRegister } from "@/entities/user/hooks";
 import { Input } from "@heroui/input";
 import { Spinner } from "@heroui/spinner";
-import { useAddModalStore } from "../../model";
-import { userRoleOptions } from '../../config';
 import { Select, SelectItem } from '@heroui/select';
+import { useRegister } from "@/entities/user/hooks";
+import { userRoleOptions } from '../../config';
+import { useAddModalStore } from "../../model";
 
 export const AddModal: FC = () => {
   const targetRef = useRef(null);

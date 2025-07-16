@@ -1,3 +1,5 @@
+"use client";
+
 import React, { FC, useRef } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, useDraggable } from "@heroui/modal";
 import { Button } from "@heroui/button";
@@ -152,7 +154,6 @@ export const EditModal: FC = () => {
                     />
                   </div>
                 </div>
-
                 <div className="space-y-2">
                   <Select
                     className="w-full"
